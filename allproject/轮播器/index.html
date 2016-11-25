@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+		<link rel="stylesheet" type="text/css" href="css/new_file.css">
+		<script src="js/new_file.js"></script>
+		<script>
+			var currentImgIndex=0;
+			var maxZindex=1;
+			window.onload=function(){
+				var btnPrev=document.getElementById("btn_prev");
+				var btnNext=document.getElementById("btn_next");
+				var markLeft=document.getElementById("mark_left");
+				var markRight=document.getElementById("mark_right");
+				btnPrev.onmouseover=markLeft.onmouseover=function(){
+					startMove(btnPrev,{opacity:100});
+				};
+				btnPrev.onmouseout=markLeft.onmouseout=function(){
+					startMove(btnPrev,{opacity:0});
+				};
+				btnNext.onmouseover=markRight.onmouseover=function(){
+					startMove(btnNext,{opacity:100});
+				};
+				btnNext.onmouseout=markRight.onmouseout=function(){
+					startMove(btnNext,{opacity:0});
+				};
+				var smallLi=document.getElementById("small_pic").getElementsByTagName('li');
+				var bigLi=document.getElementById("big_pic").getElementsByTagName('li');
+				var smallUl=document.getElementById("small_UL");
+				smallUl.style.width=smallLi[0].offsetWidth*smallLi.length+'px';
+				for(var i=0;i<smallLi.length;i++){
+					smallLi[i].index=i;
+					smallLi[i].onmouseover=function(){
+						startMove(this,{opacity:100});
+					};
+					smallLi[i].onmouseout=function(){
+						if(this.index==currentImgIndex){//currentImgIndex 0,1,2,3,4
+							return;
+						}
+						startMove(this,{opacity:50});
+					};
+					smallLi[i].onclick=function(){
+						currentImgIndex=this.index;
+						tabImg();
+					};
+				}
+				btnPrev.onclick=function(){
+					currentImgIndex--;
+					if(currentImgIndex<0){
+						currentImgIndex=smallLi.length-1;
+					}
+					tabImg();
+				};
+				btnNext.onclick=function(){
+					currentImgIndex++;
+					if(currentImgIndex>(smallLi.length-1)){
+						currentImgIndex=0;
+					}
+					tabImg();
+				};
+				function tabImg(){
+					bigLi[currentImgIndex].style['z-index']= ++maxZindex;
+					for(var i=0;i<smallLi.length;i++){
+						startMove(smallLi[i],{opacity:50});
+					}
+					startMove(smallLi[currentImgIndex],{opacity:100});
+					if(currentImgIndex==0){
+						startMove(smallUl,{left:0});
+					}else if(currentImgIndex==(smallLi.length-1)){
+						startMove(smallUl,{left:-(smallLi.length-3)*smallLi[0].offsetWidth});
+					}else{
+						startMove(smallUl,{left:-(currentImgIndex-1)*smallLi[0].offsetWidth});
+					}
+				}
+				var k=0;
+				var b=1000;
+				function auto(){
+					bigLi[k].style['z-index']=b;
+					b=b+1;
+					k=k+1;
+					if(k==5){
+						k=0;
+					}
+				}
+				setInterval(auto,1000);
+			};	
+		</script>
+	</head>
+	<body>
+		<div id="playimages" class="play">
+			<ul id="big_pic" class="big_pic">
+				<div id="btn_prev" class="prev"></div>
+				<div id="btn_next" class="next"></div>
+				<a id="mark_left" class="mark_left" href="javascript:;"></a>
+				<a id="mark_right" class="mark_right" href="javascript:;"></a>
+				<li style="z-index:1;"><img src="img/1.jpg"/></li>
+				<li><img src="img/2.jpg"/></li>
+				<li><img src="img/3.jpg"/></li>
+				<li><img src="img/4.jpg"/></li>
+				<li><img src="img/5.jpg"/></li>
+				<li><img src="img/6.jpg"/></li>
+			</ul>
+			<div id="small_pic" class="small_pic">
+				<ul id="small_UL" style="width:390px;">
+					<li style="filter:100;opacity:1;"><img src="img/1.jpg"></li>
+					<li><img src="img/2.jpg"/></li>
+					<li><img src="img/3.jpg"/></li>
+					<li><img src="img/4.jpg"/></li>
+					<li><img src="img/5.jpg"/></li>
+					<li><img src="img/6.jpg"/></li>
+				</ul>
+			</div>
+		</div>
+	</body>
+</html>

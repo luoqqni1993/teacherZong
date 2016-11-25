@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="js/jquery.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			function resetWidth(){
+				$("div").animate
+			}
+			function createImages(n){
+			var _list="";
+			for(var i=1;i<=n;i++){
+				if(i<n){
+					_list+="<span><img alt=\"\" src=\"img/0"+i+".jpg\"/></span>";
+				}else{
+					_list+="<span style=\" width:500px;\"><img alt=\"\" src=\"img/0"+i+".jpg\"/></span>";
+				}
+			}
+			document.getElementById("slider").innerHTML=_list;
+				resetWidth();
+			}
+			$(document).ready(function(){
+				createImages(6)
+			})
+		</script>
+		<style type="text/css">
+			body{margin:0 auto;}
+			img{border:none;float:left;width:510px;}
+			#slider{width:660px;height:334px;margin:0 auto;overflow:hidden;margin-top:100px;}
+			#slider span{display:block;width:30px;height:334px;overflow:hidden;float:left;}
+		</style>
+	</head>
+	<body>
+		<div id="slider"></div>
+	</body>
+</html>

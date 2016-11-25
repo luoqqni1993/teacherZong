@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script type="text/javascript">
+			(function(){
+				var age=0;
+				var name="";
+				//function Box(){}
+				Box=function(value,num){
+					name=value;
+					age=num;
+					this.getAge=function(){
+						return age;
+					}
+					this.setAge=function(value){
+						age=value;
+					}
+				}//全局，构造函数
+			})();
+			var box=new Box();
+			box.setAge(18);
+			alert(box.getAge());
+			var box1=new Box("xh",20);
+			alert(box.getAge());
+		</script>
+	</head>
+	<body>
+	</body>
+</html>

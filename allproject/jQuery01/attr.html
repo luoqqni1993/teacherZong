@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="js/jquery.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			function demo(){
+//				$("div").attr("id","name");
+//				$("div");
+//              $("div").attr({id:"box",class:"name"});
+				$("div").attr("id",function(){
+					return "name";
+				})
+                $("div");
+			}
+			$(document).ready(function(){
+				demo();
+			})
+		</script>
+	</head>
+	<body>
+		<div></div>
+	</body>
+</html>

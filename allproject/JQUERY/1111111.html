@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			body{margin: 0 auto;}
+			#container{width: auto;height: auto;border: solid 3px #f1f1f1;position: relative;margin: 0 auto;}
+			.module{width: 150px;height: auto;padding: 2px;overflow: hidden;position: absolute;}
+			div img{width: 150px;border: none;float: left;}
+			div span{width: 100%;height: 30px;line-height: 30px;text-align: center;display: block;float: left;}
+			
+		</style>
+		<script src="js/jquery-2.1.0.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			$(document).ready(function(){
+				var _c = initCss();
+				initArray(_c);
+				loadImg();
+				
+			})
+			function resetContainerHeight(){
+				var _max = arr[0]; 
+				for(var i = 0;i<arr.length;i++){
+					if(_max<arr[i]){
+						_max=arr[i];
+					}
+				}
+			}
+//			window.onreset = function(){
+//				
+//			}
+			window.onscroll = function(){
+				var _total = $(document).height();
+				var s_t = $(document).scrollTop();
+				var w_t = $(window).height();
+				if(_total == s_t+w_t){
+					_s=_s+40;
+					loadImg();
+				}
+			}
+			var arr = [];
+			function initArray(c){
+				for(var i = 0;i<c;i++){
+					arr[i] = 0;
+				}
+			}
+			var _s = 0;//记录当前需要从第几张图片进行加载。
+			function loadImg(){
+				/*$.ajax({
+					url:"js/waterfall.json",
+					success:function(data){
+						var arr = data["images"];
+						createElement(data);
+					}
+				})*/
+				$.post("js/waterfall.json",null,function(data){
+					createElement(data);
+					checkImgComplete();
+					resetContainerHeight();
+				},"json")
+				
+			}
+			function checkImgComplete(){
+				var _list = $("#container img").get();
+				var _timer = 0;
+				checking();
+				function checking(){
+					window.clearTimeout(_timer);
+					var _complete = true;
+					for (var i = _s;i<_list.length;i++){
+						if(!_list[i].complete){
+						//complete：img标签自有的一个属性，表示当图片加载完成以后该属性值为“true”
+						//该图片未加载完成期间，该属性值为：“false”;
+						_complete = false;
+						break;
+						}
+					}
+					if(_complete){
+						waterFall();
+					}else{
+						_timer = window.setTimeout(checking,60);
+					}
+				}
+			}
+			function minHeight(){
+				var n = 0;//索引值
+			 var _min = arr[0];//把数组的第一个元素赋值给min
+			 for(var i = 1;i<arr.length;i++){
+			 	//循环判断min是不是最小高度。如果不是把数组的索引值赋值给n。
+			 	if(_min>arr[i]){
+			 		_min = arr[i];
+			 		n=i;
+			 	}
+			 }
+			 return n;//返回n
+			}
+			function waterFall(){
+			 var n = 0;
+			 var _list = $(".module").get();
+			 for(var i = _s;i<_list.length;i++){
+			 	n =minHeight();
+			 	$(_list[i]).css({"left":n*154+"px","top":arr[n]+"px"});
+			 	arr[n]+=_list[i].offsetHeight;
+			 }
+			 
+			}
+			function createElement(data){
+				var oContainer = document.getElementById("container");
+				var oImg = null;var oDiv = null;var oSpan = null;
+				
+				for(var i = _s;i<_s+40&&i<data["images"].length;i++){
+					oImg = document.createElement("img");
+					oImg.src = "img/"+(i+1)+'.jpg';
+					oSpan = document.createElement("span");
+					oSpan.innerHTML = "H51628WATERFULL";
+					oDiv = document.createElement("div");
+					oDiv.className = "module";
+					oDiv.appendChild(oImg);
+					oDiv.appendChild(oSpan);
+					oContainer.appendChild(oDiv);
+				}
+			}
+			//因为要给图片定位，且每一行的最后一张图不能超过浏览器边界。所以我们要设定iD为container的div的宽度，保证当前的宽度，是图片的最大整数倍
+			function initCss(){
+				//alert($("body").width());//当前浏览器窗口的宽度；
+				var _c = Math.floor(($("body").width()-6)/154);
+				//计算出每行可以放多少张图片后，应该排列图片
+				var _w = _c*154;//当前浏览器窗口的宽度
+				$("#container").css("width",_w+"px");
+				return _c;
+			}
+		</script>
+	</head>
+	<body>
+		<div id="container">
+			
+		</div>
+	</body>
+</html>

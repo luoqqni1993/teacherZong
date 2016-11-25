@@ -1,0 +1,47 @@
+*{margin:0px;padding:0px;}
+#com-area-topnav{width:1263px;height:30px;background:#f2f1f1;}
+#com-area-topnav p{font-size:12px;float:left;margin-top:9px;margin-left:40px;}
+#com-area-topnav p span{color:#fe0080;}
+#com-area-topnav .login{float:left;margin-left:10px;margin-top:6px;}
+#com-area-topnav .register{float:left;margin-left:9px;margin-top:9px;font-size:12px;text-decoration:none;color:#3386c7;}
+#com-area-topnav .register span{color:#db1515;}
+#com-area-topnav .right-nav{float:left;margin-left:296px;margin-top:9px;}
+#com-area-topnav li{float:left;list-style-type:none;font-size:12px;height:12px;border-right:1px solid #b8c0c0;}
+#com-area-topnav li a{text-decoration:none;color:#333333;}
+#com-area-topnav .a1{width:77px;background:url(../img/down-1.png) no-repeat;background-position:57px 4px;}
+#com-area-topnav .a2{width:53px;padding-left:26px;background:url(../img/email-1.png) no-repeat;background-position:9px 1px;}
+#com-area-topnav .a3{width:72px;padding-left:8px;}
+#com-area-topnav .a3 a{color:#ff3300;}
+#com-area-topnav .a4{width:76px;padding-left:8px;background:url(../img/down-1.png) no-repeat;background-position:64px 4px;}
+#com-area-topnav .a5{width:50px;height:15px;padding-left:26px;background:url(../img/square-1.png) no-repeat;background-position:9px 0px;border-right:none;}
+#com-area-topnav .a6{width:56px;padding-left:8px;border-left:1px solid #b8c0c0;}
+#com-area-topnav .a7{width:36px;padding-left:8px;border-right:none;}
+#com-area-topnav .a7 a{color:#ff3300;}
+#com-area-header{width:1263px;height:92px;background:url(../img/aokang-1.png) no-repeat;background-position:41px 22px;}
+#com-area-header img{margin-left:5px;margin-top:10px;float:left;}
+#com-area-header li{font-size:14px;color:#ff0000;list-style-type:none;}
+#com-area-header .phoneak{float:left;margin-left:366px;margin-top:16px;}
+#com-area-header .wrap{height:100%;width:535px;float:left;}
+#com-area-header .text{float:left;margin-left:72px;margin-top:22px;border:3px solid #cf000d;width:353px;height:32px;background:url(../img/magnifier-1.png) no-repeat;background-position:6px 9px;padding-left:27px;font-size:14px;color:#a9a9a9;}
+#com-area-header .search{float:left;height:38px;width:77px;background:#cf000d;margin-top:22px;line-height:38px;text-align:center;color:#ffffff;font-weight:bold;text-decoration:none;}
+#com-area-header .shop{width:99px;height:33px;float:left;margin-left:90px;margin-top:25px;border:1px solid #e5e5e5;font-size:14px;text-decoration:none;color:#000000;line-height:33px;padding-left:59px;font-weight:blod;background:url(../img/shop-1.png) no-repeat #f0eff0;background-position:17px 7px;}
+#com-area-header .shop:hover{background:url(../img/shop-2.png) no-repeat #c80000;background-position:17px 7px;color:#ffffff;}
+#com-area-header .category{float:left;margin-left:72px;margin-top:7px;}
+#com-area-header .category li {float:left;padding-right:11px;}
+#com-area-header .category li a{color:#666666;text-decoration:none;font-size:12px;}
+#com-area-header .category .a1{padding-right:18px;}
+#com-area-header .category .a2 a{color:#e53333;}
+#headNav{width:1263px;height:38px;background:#3c4251;}
+#headNav .wrap{float:left;margin-left:40px;}
+#headNav li{float:left;height:100%;list-style-type:none;padding-left:20px;padding-right:20px;}
+#headNav li a{font-size:12px;color:#ffffff;text-decoration:none;line-height:38px;}
+#headNav .b1{width:190px;background:url(../img/down-arrow-1.png) no-repeat #ff481b;background-position:178px 16px;padding-right:0px;}
+#headNav .b2{background:#292d37;}
+#headNav .b8{margin-left:372px;}
+#headNav .b3:hover,#headNav .b4:hover,#headNav .b5:hover,#headNav .b6:hover,#headNav .b7:hover,#headNav .b8:hover{background:#292d37;}
+#list div{float:left;height:368px;width:230px;border:1px solid #dddddd;margin-top:20px;margin-left:18px;overflow:hidden;white-space:nowrap;}
+#list div:hover{border-color:red;white-space:normal;}
+#list p{float:left;font-size:16px;color:#c80a28;height:16px;width:80px;font-weight:bold;margin-top:277px;margin-left:4px;}
+#list span{float:left;font-size:12px;height:12px;width:50px;margin-top:280px;margin-left:80px;color:#999999;text-decoration:line-through;}
+#list a{float:left;font-size:12px;color:#333333;text-decoration:none;margin-top:11px;margin-left:4px;}
+#list .buy{background:red;width:150px;height:30px;margin-left:20px;color:#ffffff;line-height:30px;text-align:center;border-radius:10%;}

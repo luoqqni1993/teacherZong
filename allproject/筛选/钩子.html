@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="js/jquery.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			(function($){
+				if(!$.cssHooks){
+					throw("jQuery 1.4.3+is need for this plugin to work");
+					return;
+				}
+				function styleSupport(prop){
+					var vendorProp,supportedProp,
+					capProp=prop.charAt(0).toUpperCase()+prop.slice(),
+					prefixes=["Moz","Webkit","O","ms"],
+					div=document.createElement("div");
+					if(prop in div.style){
+						supportedProp=prop;
+					}else{
+						for(var i=0;i<prefixes.length;i++){
+							vendorProp=prefixes[i]+capProp;
+							if(vendorProp in div.style){
+								supportedProp=vendorProp;
+								break;
+							}
+						}
+					}
+					div=null;
+					$.support[prop]=supportedProp;
+					return supportedProp;
+				}
+				var borderRadius=styleSupport("borderRadius");
+				if(borderRadius&&borderRadius!=="borderRadius"){
+					$.cssHooks.borderRadius={
+						get:function(elem,computed,extra){
+							return $.css(elem,borderRadius);
+						}
+						set:function(elem,value){
+							elem.style[borderRadius]=value;
+						}
+					};
+				}
+			})(jQuery)
+		</script>
+	</head>
+	<body>
+	</body>
+</html>

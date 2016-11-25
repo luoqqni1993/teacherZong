@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			div{height:100px;width:100px;background:brown;}
+		</style>
+		<script type="text/javascript" src="js/jquery-1.11.0.js"></script>
+		<script type="text/javascript">
+		$(document).ready(function(){
+			function hover(_el,fn1,fn2){
+				_el.onmouseover=fn1;
+				_el.onmouseout=fn2;
+			}
+			hover($("div")[0],function () {
+    				$(this).css("background","red");
+  			}, function () {
+   					 $(this).css("background","darkblue");
+  			})
+
+				
+		})
+			
+		</script>
+	</head>
+	<body>
+		<div></div>
+	</body>
+</html>

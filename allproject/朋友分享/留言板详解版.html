@@ -1,0 +1,225 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+<style>
+	*{
+		margin:0;
+		padding:0;
+		list-style:none;
+		font-family:"微软雅黑";
+		font-size:12px;
+	}a
+	body{
+		background:#f3f3f3;
+	}
+	cite{
+		font-style:normal;
+		float:right;
+	}
+	.box{
+		width:728px;
+		margin:0 auto;
+		border:solid 1px #e6e6e6;
+		background:#FFF;
+		position:relative;
+		padding-bottom:60px;
+	}
+	.box ul{
+		padding:0 34px;
+	}
+	.box ul li{
+		border-bottom:solid 1px #e6e6e6;
+		position:relative;
+		padding-top:30px;
+	}
+	.box li .right{
+		padding-left:64px;
+	}
+	.box li .left{
+		position:absolute;
+		left:0;
+		top:30px;
+		width:64px;
+		overflow:hidden;
+	}
+	.box li .left span{
+		display:block;
+		overflow:hidden;
+		border-radius:50%;
+		width:50px;
+		height:50px;
+	}
+	.box li .left span img{
+		width:100%;
+	}
+	.userinfo span,.userinfo cite{
+		padding-right:10px;
+		line-height:30px;
+		color:#999;
+	}
+	.userinfo .name{
+		color:#ff8b3d;
+	}
+	.callback{
+		background:#fafafa;
+		padding: 10px 18px;
+		margin:2px 0;
+	}
+	.callback p{
+		margin:0;
+		padding:0;
+		line-height:22px;
+		font-size:15px;
+	}
+	.msg{
+		padding:8px 0;
+		line-height:22px;
+		font-size:15px;
+	}
+	.func{
+		overflow:hidden;
+		line-height:33px;
+	}
+	.func a{
+		text-decoration:none;
+		padding-left:10px;
+		color:#999;
+	}
+	.box .input textarea{
+		display:block;
+		resize:none;
+	}
+	.msg_input{
+		position:absolute;
+		left:0;
+		bottom:0;
+		width:728px;
+		background:#f5f5f5;
+		overflow:hidden;
+	}
+	.msg_input .input{
+		padding:10px 23px 10px 12px;
+		float:left;
+	}
+	.msg_input .input input{
+		width:526px;
+		height:38px;
+		border:solid 1px #e6e6e6;
+		outline:none;
+		text-indent:20px;
+	}
+	.msg_input .btn{
+		padding:10px 0;
+		float:left;
+	}
+	.msg_input .btn button{
+		width:140px;
+		height:38px;
+		box-sizing:border-box;
+		border:solid 1px #e6e6e6;
+		background:#FFF;
+		outline:none;
+	}
+</style>
+<script>
+	window.onload=function(){
+		//调用的函数在下面
+		//获取box中的ul
+		var oUl=getByClass(document,'box')[0].getElementsByTagName('ul')[0];
+		//获取class=huifu
+		var huifu=getByClass(document,'huifu')[0];
+		//获取class=pinglun
+		var pinglun=getByClass(document,'pinglun')[0];
+		//获取input框  class=comm_ipt
+		var oIpt=getByClass(document,'comm_ipt')[0]
+		//‘评论’点击事件
+		pinglun.onclick=function(){
+			//创建li
+			var oLi=document.createElement('li');
+			//li中添加内容
+			oLi.innerHTML="<div class='left'><span><img src='images/touxiang.jpg'/></span></div><div class='right'><div class='userinfo'><cite>47#</cite><span class='name'>谷子的心</span><span class='info'>神马级手机控</span></div><div class='msg'>"+oIpt.value+"</div><div class='func'><cite><a class='comm_remove' href='javascript:;'>删除</a><a class='hf' href='javascript:;'>回复</a></cite></div></div>";
+			//获取a  class=comm_remove  删除按钮
+			var oRemove=getByClass(oLi,'comm_remove')[0];
+			//获取a  class=hf  回复按钮
+			var oHf=getByClass(oLi,'hf')[0];
+			//获取class=right  为在right里面插入div做准备
+			var oRight=getByClass(oLi,'right')[0];
+			//通过判断input内容不为空 添加li
+			if(oIpt.value!==''){
+				oUl.insertBefore(oLi,oUl.children[0]);
+			}
+			//添加评论后清空input内容
+			oIpt.value="";
+			//添加删除评论点击事件
+			oRemove.onclick=function(){
+				oUl.removeChild(oLi);
+			}
+			//添加‘准备回复事件’  使‘评论’隐藏 ‘回复’出现
+			oHf.onclick=function(){
+				huifu.style.display='block';
+				pinglun.style.display='none';
+				//添加回复事件   必须写在‘准备回复事件’内   
+				huifu.onclick=function(){
+					//创建一个div
+					var oDiv=document.createElement('div');
+					//给div添加内容
+					oDiv.innerHTML="<p>米TUO‖ posted on 2016-08-01 20:43:36</p><p>"+oIpt.value+"</p>";
+					//通过判断input是不为空 添div
+					if(oIpt.value!==''){
+						oRight.insertBefore(oDiv,oRight.children[2]);
+					}				
+					//给div起class名  （样式）
+					oDiv.className='callback'
+					//使‘评论’出现 ‘回复’隐藏
+					huifu.style.display='none';
+					pinglun.style.display='block';
+					//重置input内容
+					oIpt.value="";
+				}
+			}	
+		}
+		//包装函数通过class名获取父元素下的子元素（返回值是一个数组,调用时取下标）
+		function getByClass(obj,sClass){
+			var aTag=obj.getElementsByTagName('*');
+			var result=[];
+			for(var i=0;i<aTag.length;i++){
+				if(aTag[i].className==sClass){
+					result.push(aTag[i]);
+				}		
+			}
+			return result;
+		}
+	}
+</script>
+</head>
+
+<body>
+<div class="box">
+	<ul>
+		<li>
+			<div class="left"><span><img src="images/touxiang.jpg"/></span></div>
+			<div class="right">
+				<div class="userinfo"><cite>47#</cite><span class="name">谷子的心</span><span class="info">神马级手机控</span></div>
+				<div class="callback">
+					<p>米TUO‖ posted on 2016-08-01 20:43:36</p>
+					<p>报名 报名</p>
+				</div>
+				<div class="msg">红米pro高配版</div>
+				<div class="func"><cite><a href="javascript:;">删除</a><a href="javascript:;">回复</a></cite></div>
+			</div>
+		</li>
+	</ul>
+	<div class="msg_input">
+		<div class="input">
+			<input class="comm_ipt" type="text"/>
+		</div>
+		<div class="btn">
+			<button class="huifu" style="display:none">回复</button>
+			<button class="pinglun">评论</button>
+		</div>
+	</div>
+</div>
+</body>
+</html>

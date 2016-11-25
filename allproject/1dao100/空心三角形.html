@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script type="text/javascript">
+			for(var i=0;i<9;i++){
+				for(var j=1;j<i;j++){
+					document.write("&nbsp");
+					if(j==i-1){
+						document.write("*");
+					}
+				}
+				if(i>0){
+				document.write("<br>"+"*");
+				}
+				if(i==8){
+					for(var k=0;k<9;k++){
+						document.write("*"+" ");
+					}
+				}
+				if(i==0){
+					document.write("*");
+				}
+				
+			}
+		</script>
+	</head>
+	<body>
+	</body>
+</html>

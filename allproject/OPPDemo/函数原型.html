@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script type="text/javascript">
+			function Person(){
+				//实例属性
+				//实例方法
+			}//创建构造函数
+			//原型属性
+			Person.prototype.name="xm";
+			Person.prototype.age="18";
+			//原型方法
+			Person.prototype.showName=function(){
+				return this.name;
+			}
+			Person.prototype.showAge=function(){
+				return this.age;
+			}
+			var ps1=new Person();
+			var ps2=new Person();
+			alert(ps1.name);
+			alert(ps1.showAge());
+			alert(ps2.name);
+			alert(ps2.showAge());
+			alert(ps1.showAge()==ps2.showAge());
+			
+			//原型的缺点，虽然可以多个对象共享同一个属性方法，但是原型属性没有办法传参，所以创建出来的对象都共有同一个属性值。
+		</script>
+	</head>
+	<body>
+	</body>
+</html>

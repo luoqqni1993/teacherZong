@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<link rel="stylesheet" type="text/css" href="css/product.css"/>
+		<script type="text/javascript">
+			//创建评论的构造函数
+			function comment(){
+				var oText=document.getElementById("text1");
+				var oBtn=document.getElementById("btn");
+				var oUl=document.getElementById("ul1");
+				oBtn.onclick=function(){
+					var iText=oText.value;
+					var oLi=document.createElement("li");
+					var oSpan=document.createTextNode(iText);
+					oLi.appendChild(oSpan);
+					if(oUl.firstChild){
+						oUl.insertBefore(oLi,oUl.firstChild);
+					}else{
+						oUl.appendChild(oLi);
+					}
+					oText.onfocus=function(){
+						oText.value="";
+					}
+				}
+			}
+			//创建改变图片透明度的构造函数
+			function ChangeOpacity(){
+				this.timer=0;
+				this.main=document.getElementById("main").getElementsByTagName("img")[0];
+				this.big_pic=document.getElementById("big_pic").getElementsByTagName("img")[0];
+				this.list=null;
+				//创建获取图片地址的构造方法
+				this.attr=(function(){
+					var _arr=[];
+					for(var i=0;i<5;i++){
+						_arr[i]="img/lb"+(i+1)+".jpg";
+					}
+					return _arr;
+				})()
+				//创建改变图片透明度的构造方法
+				this.changeOpacity=function(){
+					var _self=this;
+					var _opacity=0.3;
+					function start(){
+						window.clearTimeout(_self.timer);
+						_opacity+=0.03;
+						if(_self.main.style.opacity){
+							_self.main.style.opacity=_opacity;
+						}else{
+							_self.main.style.filter="alpha(opacity="+_opacity*100+")";
+						}
+						if(_opacity<1){
+							_self.timer=window.setTimeout(start,30);
+						}
+					}
+					start();
+				}
+				//创建绑定事件的构造方法
+				this.boundEvent=function(){
+					var _self=this;
+					_self.list=document.getElementById("pic").getElementsByTagName("img");
+					for(var i=0;i<this.list.length;i++){
+						(function(n){
+							_self.list[i].onmouseover=function(){
+								_self.main.src=this.src;
+								_self.main.style.opacity=0.3;
+								_self.big_pic.src=this.src;
+								_self.changeOpacity();
+							}
+						})(i)
+					}
+				}
+				//创建创建图片的构造方法
+				this.createImage=function(n){
+					var imgs="";
+					for(var i=0;i<n;i++){
+						imgs+="<img alt=\"\" src=\""+this.attr[i]+"\"/>";
+					}
+					document.getElementById("pic").innerHTML=imgs;
+					this.boundEvent();
+				}
+				//创建放大镜方法
+				this.magnifier=function(){
+					var _opacity=document.getElementById("opacity");
+					var _mark=document.getElementById("mark");
+					var _main=document.getElementById("main");
+					var _float=document.getElementById("float");
+					var oBig=document.getElementById("big_pic");
+					var oImg=oBig.getElementsByTagName("img")[0];
+					_mark.onmouseenter=function(){
+						_float.style.display="block";
+						oBig.style.display="block";
+					}
+					_mark.onmouseout=function(){
+						_float.style.display="none";
+						oBig.style.display="none";
+					}
+					_mark.onmousemove=function(evt){
+						var e=evt||window.event;
+						console.log(e.offsetY);
+						
+						var l=e.offsetX-(_float.offsetWidth)/2;
+						var t=e.offsetY-(_float.offsetHeight)/2;
+						if(l<0){
+							l=0;
+						}else if(l>=_mark.offsetWidth-_float.offsetWidth){
+							l=_mark.offsetWidth-_float.offsetWidth;
+						}
+						if(t<0){
+							t=0;
+						}else if(t>=_mark.offsetHeight-_float.offsetHeight){
+							t=_mark.offsetHeight-_float.offsetHeight;
+						}
+						_float.style.left=l+"px";
+						_float.style.top=t+"px";
+						var parcentX=l/(_mark.offsetWidth-_float.offsetWidth);
+						var parcentY=t/(_mark.offsetHeight-_float.offsetHeight);
+						oImg.style.left=-parcentX*(oImg.offsetWidth-oBig.offsetWidth)+"px";
+						oImg.style.top=-parcentY*(oImg.offsetHeight-oBig.offsetHeight)+"px";
+					}
+				}
+			}
+			window.onload=function(){
+				new ChangeOpacity().createImage(5);
+				new ChangeOpacity().magnifier();
+				comment();
+				var _number=document.getElementById("number");
+				var _cookie=JSON.parse(document.cookie.split("=")[1]);
+				_number.innerHTML=_cookie["list"]+"件商品";
+			}
+		</script>
+	</head>
+	<body>
+		<div id="com-area-topnav">
+			<p>奥康国际(<span>603001</span>)官方唯一商城!4009-603001</p>
+			<a class="login" href="javascript:;"><img src="img/enter.png"></a>
+			<a class="register" href="javascript:;">[<span>快速注册</span>]</a>
+			<ul class="right-nav">
+				<li class="a1"><a href="javascript:;">个人中心</a></li>
+				<li class="a2"><a href="javascript:;">信息(0)</a></li>
+				<li class="a3"><a href="javascript:;">企事业团购</a></li>
+				<li class="a4"><a href="javascript:;">网站导航</a></li>
+				<li class="a5"><a href="javascript:;">手机版</a></li>
+				<li class="a6"><a href="javascript:;">新手帮助</a></li>
+				<li class="a7"><a href="javascript:;">会员秀</a></li>
+			</ul>
+		</div>
+		<div id="com-area-header">
+			<ul class="phoneak">
+				<li>手</li>
+				<li>机</li>
+				<li>奥</li>
+				<li>康</li>
+			</ul>
+			<img src="img/erweima-1.png">
+			<div class="wrap">
+				<input type="text" class="text" value="请输入搜索关键词">
+				<a href="javascript:;" class="search">搜索</a>
+				<ul class="category">
+					<li><a href="javascript:;">商务男鞋</a></li>
+					<li><a href="javascript:;">男凉鞋</a></li>
+					<li><a href="javascript:;">奥康</a></li>
+					<li><a href="javascript:;">驾车鞋</a></li>
+					<li class="a1"><a href="javascript:;">大牌清仓！</a></li>
+					<li class="a2"><a href="javascript:;">秋季新品</a></li>
+					<li><a href="javascript:;">小白鞋</a></li>
+				</ul>
+			</div>
+			<a href="javascript:;" class="shop" id="number">购物车(0)</a>
+		</div>
+		<div id="headNav">
+			<ul class="wrap">
+				<li class="b1"><a href="javascript:;">全部商品分类</a></li>
+				<li class="b2"><a href="javascript:;">首页</a></li>
+				<li class="b3"><a href="javascript:;">天天团</a></li>
+				<li class="b4"><a href="javascript:;">新品发布</a></li>
+				<li class="b5"><a href="javascript:;">奥康特惠</a></li>
+				<li class="b6"><a href="javascript:;">积分购</a></li>
+				<li class="b7"><a href="javascript:;">防伪查询</a></li>
+				<li class="b8"><a href="javascript:;">哇！O2O</a></li>
+			</ul>
+		</div>
+		<div id="place">
+			<span>您现在的位置:</span>
+			<a href="index.html" target="_blank">奥康首页</a>
+			<span>&gt;</span>
+			<a href="javascript:;">男鞋馆</a>
+			<span>&gt;</span>
+			<a href="javascript:;">商务正装</a>
+			<span>-奥康男鞋 春新款商务英伦男鞋男士真皮尖头系带男皮鞋耐磨 143111025</span>
+		</div>
+		<div id="bp">
+			<div id="opacity">
+				<div id="main" class="main">
+					<span id="mark" class="mark"></span>
+					<span id="float" class="float"></span>
+					<img alt="" src="img/lb1.jpg"/>
+				</div>
+				<span class="explain">鼠标移至图片上可放大产品</span>
+				<div id="pic" class="pic"></div>
+				<div id="big_pic" class="big_pic">
+					<img alt="" src="img/lb1.jpg"/>
+				</div>
+				<span class="share">
+					<span>分享到:</span>
+					<a href="javascript:;" class="a1"></a>
+					<a href="javascript:;" class="a2"></a>
+					<a href="javascript:;" class="a3"></a>
+					<a href="javascript:;" class="a4"></a>
+					<a href="javascript:;" class="a5"></a>
+					<a href="javascript:;" class="a6"></a>
+					<a href="javascript:;" class="a7">收藏该商品</a>
+				</span>
+			</div>
+			<div id="buy">
+				<span class="a1">奥康男鞋 春新款商务英伦男单鞋男士真皮尖头系带男皮鞋耐磨 143111025</span>
+				<span class="a2">吊牌价:</span>
+				<span class="a3">539.00元</span>
+				<span class="a4">(4.4折 节省300元)</span>
+				<span class="a5">商城价:</span>
+				<span class="a6">会员专享折扣</span>
+				<span class="a7">立送:</span>
+				<span class="a8">126</span>
+				<span class="a9">个奥康商城积分,积分可兑换积分商品~</span>
+				<span class="a10">评论:</span>
+				<span class="a11">已有</span>
+				<span class="a12">179</span>
+				<span class="a13">人评价</span>
+				<span class="a14">总销量:</span>
+				<span class="a15">4835</span>
+				<span class="a16">件</span>
+				<span class="a17">运费：EMS全国包邮(香港、澳门、台湾、钓鱼岛除外)</span>
+				<span class="a18">
+					<span class="b1">促销信息</span>
+					<span class="right"></span>
+					<span class="b2">【奥康商城】一券在手，优惠我有，速来领取吧</span>
+					<a href="javascript:;" class="b3">查看详情>></a>
+				</span>
+				<span class="a19"></span>
+				<span class="a20">服务承若：</span>
+				<span class="a21">
+					<span class="b1">奥康正品 假一赔十</span>
+					<span class="b2">7天无理由退换货</span>
+					<span class="b3">10天保值 差价返还</span>
+				</span>
+				<span class="a22">支付方式:</span>
+				<ul class="a23">
+					<li class="c"><a href="javascript:;">支付宝</a></li>
+					<li><a href="javascript:;">财付通</a></li>
+					<li><a href="javascript:;">网银支付</a></li>
+					<li><a href="javascript:;">信用卡快捷支付</a></li>
+					<li><a href="javascript:;">储蓄卡快捷</a></li>
+					<li><a href="javascript:;">支持银行转账</a></li>
+				</ul>
+			</div>
+		</div>
+		<div id="comment">
+			<h3 style="text-align:center;">请输入您的评论：</h3>
+			<input type="text" id="text1">
+			<input type="button" id="btn" value="评论">
+			<br>
+			<ul id="ul1"></ul>
+		</div>
+		<div id="image">
+			<img class="a1" src="img/autumn1-1.png"/>
+			<div class="a2">
+				<img class="b1" src="img/summer1-1.png"/>
+				<img class="b2" src="img/summer2-1.png"/>
+			</div>
+			<div class="a3">
+				<ul>
+					<li class="c1"></li>
+					<li class="c2"></li>
+					<li class="c3"></li>
+					<li class="c4"></li>
+					<li class="c5"></li>
+					<li class="c6"></li>
+					<li class="c7"></li>
+					<li class="c8"></li>
+					<li class="c9"></li>
+					<li class="c10"></li>
+				</ul>
+			</div>
+		</div>
+		<div id="content">
+			<div id="form">
+				<table>
+					<tr>
+						<td class="a1">上市年份季节：</td>
+						<td class="a2">2014年夏季</td>
+						<td class="a1">风格：</td>
+						<td class="a2">商务</td>
+						<td class="a1">鞋头款式：</td>
+						<td class="a2">箭头</td>
+					</tr>
+					<tr>
+						<td class="a1">闭合方式：</td>
+						<td class="a2">系带</td>
+						<td class="a1">鞋底材质：</td>
+						<td class="a2">橡胶</td>
+						<td class="a1">鞋面材质：</td>
+						<td class="a2">真皮头层皮</td>
+					</tr>
+					<tr>
+						<td class="a1">鞋面材料：</td>
+						<td class="a2">牛皮</td>
+						<td class="a1">皮革风格：</td>
+						<td class="a2">软面皮</td>
+						<td class="a1">内里材质：</td>
+						<td class="a2">皮</td>
+					</tr>
+					<tr>
+						<td class="a1">制作工艺：</td>
+						<td class="a2">胶粘鞋</td>
+						<td class="a1">流行元素：</td>
+						<td class="a2">车缝线</td>
+						<td class="a1">图案：</td>
+						<td class="a2">纯色</td>
+					</tr>
+					<tr>
+						<td class="a1">季节：</td>
+						<td class="a2">春秋</td>
+						<td class="a1">场合：</td>
+						<td class="a2">约会</td>
+						<td class="a1">款式：</td>
+						<td class="a2">德比鞋(正装皮鞋)</td>
+					</tr>
+					<tr>
+						<td class="a1">功能：</td>
+						<td class="a2">耐磨</td>
+						<td class="a1"></td>
+						<td class="a2"></td>
+						<td class="a1"></td>
+						<td class="a2"></td>
+					</tr>
+				</table>
+				<span class="s1">应客户需求，特增加黑色45 46 47特大鞋码，货号为</span>
+				<span class="s2">15301106545 15301106546 15301106547</span>
+				<span class="s3">MODEL SHOW</span>
+				<span class="s4">模特展示&完全自拍</span>
+				<span class="s5"></span>
+				<span class="s6">Aokang spend many years studying business shoes,whether imported first layer of leather</span>
+				<span class="s7">or breathable absorbent inside,each option protect feet carefully</span>
+				<img class="s8" src="img/mote1-1.png"/>
+				<img src="img/mote2-1.png"/>
+				<img src="img/mote3-1.png"/>
+				<img src="img/mote4-1.png"/>
+				<img src="img/shoe1-1.png"/>
+				<img src="img/shoe2-1.png"/>
+				<img src="img/shoe3-1.png"/>
+			</div>
+			<div id="promotion">
+				<h3 class="b1">新款推荐</h3>
+				<ul class="a1">
+					<li class="d1">
+						<a href="javascript:;">奥康男鞋 新款套脚轻便护脚鞋韩版</a>
+						<span>￥299.00</span>
+					</li>
+					<li class="d2">
+						<a href="javascript:;">奥康男鞋 新款青年男士休闲鞋真皮</a>
+						<span>￥269.00</span>
+					</li>
+					<li class="d3">
+						<a href="javascript:;">幸福猫童鞋 男短靴冬韩版男童棉靴</a>
+						<span>￥139.00</span>
+					</li>
+					<li class="d4">
+						<a href="javascript:;">奥康男鞋 新款韩版真皮时尚潮鞋软</a>
+						<span>￥369.00</span>
+					</li>
+					<li class="d5">
+						<a href="javascript:;">奥康男鞋 新款雕花真皮韩版休闲鞋</a>
+						<span>￥439.00</span>
+					</li>
+					<li class="d6">
+						<a href="javascript:;">奥康男鞋 新款尖头英伦真皮软底除</a>
+						<span>￥539.00</span>
+					</li>
+				</ul>
+				<h3 class="b2">热销排行榜</h3>
+				<ul class="a2">
+					<li class="d1">
+						<a href="javascript:;">奥康 英伦商务正装秋季尖头系带透</a>
+						<span>￥269.00</span>
+					</li>
+					<li class="d2">
+						<a href="javascript:;">奥康皮鞋 秋季男士商务休闲鞋真皮</a>
+						<span>￥199.00</span>
+					</li>
+					<li class="d3">
+						<a href="javascript:;">奥康男鞋 春新款商务英伦男单鞋男</a>
+						<span>￥239.00</span>
+					</li>
+					<li class="d4">
+						<a href="javascript:;">奥康皮鞋 男士商务正装鞋 新款英伦</a>
+						<span>￥249.00</span>
+					</li>
+					<li class="d5">
+						<a href="javascript:;">奥康 皮带男士真皮 男韩版 自动扣</a>
+						<span>￥79.00</span>
+					</li>
+					<li class="d6">
+						<a href="javascript:;">奥康男鞋 秋季新款真皮圆头系带商</a>
+						<span>￥199.00</span>
+					</li>
+				</ul>
+			</div>
+		</div>
+		<img src="img/htimg-1.png"/>
+		<div id="guide">
+			<div class="g1">
+				<h6>奥康承诺</h6>
+				<ul>
+					<li class="l1">
+						<span class="a">正品行货</span>
+						<span class="b">行货正品、奥康旗下唯一官方商城。</span>
+					</li>
+					<li class="l2">
+						<span class="a">闪电发货</span>
+						<span class="b">全国包邮(港澳台除外),最快一天送达。</span>
+					</li>
+					<li class="l3">
+						<span class="a">尊贵服务</span>
+						<span class="b">会员专属折扣与服务，同享线下优惠。</span>
+					</li>
+					<li class="l4">
+						<span class="a">七日退换</span>
+						<span class="b">七日内可自由退换货，并享受国家三包服务。</span>
+					</li>
+				</ul>
+			</div>
+			<div class="g2">
+				<h6>奥康服务</h6>
+				<ul class="u1">
+					<li class="a">新手指南</li>
+					<li>如何注册/登入</li>
+					<li>找回密码</li>
+					<li>会员等级</li>
+					<li>购物保障</li>
+					<li class="b">售后服务</li>
+					<li>退换货流程</li>
+					<li>如何投诉</li>
+					<li>退款说明</li>
+					<li>练习客服</li>
+				</ul>
+				<ul class="u2">
+					<li class="a">购物指南</li>
+					<li>如何购物</li>
+					<li>团购说明</li>
+					<li>企事业单位采购</li>
+					<li>购物常见问题</li>
+					<li class="b">关于奥康商城</li>
+					<li>商城简介</li>
+					<li>奥康资讯</li>
+					<li>人才招聘</li>
+					<li>线下同款</li>
+				</ul>
+				<ul class="u3">
+					<li class="a">支付与配送</li>
+					<li>支付常见问题</li>
+					<li>在线支付</li>
+					<li>配送收费</li>
+					<li>上门服务</li>
+					<li class="b">客服热线</li>
+					<li>4009-603001</li>
+					<li>工作时间</li>
+					<li>9:00-22:00</li>
+					<li>帮助中心</li>
+				</ul>
+			</div>
+			<div class="g3">
+				<h6>关注奥康商城</h6>
+				<ul class="u1">
+					<li class="l1">
+						<span class="a">手机客户端</span>
+						<span class="b">轻松购物，迅速到家！</span>
+						<span class="f1"><img src="img/AppStore-1.png"/></span>
+						<span class="f2"><img src="img/Android-1.png"/></span>
+						<span>
+							<span class="c1">手机登入</span>
+							<a class="d" href="javascript:;">m.aokang.cn</a>
+							<span class="c2">指尖购物</span>
+						</span>
+					</li>
+					<li class="l2">
+						<span class="a">奥康商城官方微信</span>
+						<span class="b">微信扫二维码，随时随地地与我们亲密接触精彩活动，劲爆优惠触手可得！</span>
+					</li>
+				</ul>
+				<ul class="u2">
+					<li class="l3">
+						<span class="c">查看腾讯微博</span>
+						<a class="e" href="javascript:;">立即关注</a>
+					</li>
+					<li class="l4">
+						<span class="c">查看新浪微博</span>
+						<a class="e" href="javascript:;">立即关注</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+		<div id="copyRight">
+			<ul class="u1">
+				<li>友情链接</li>
+				<li>顺丰快递查询</li>
+				<li>家具网上商城</li>
+				<li>淘粉吧</li>
+				<li>品牌资讯</li>
+				<li>客户经理</li>
+				<li>装修效果图</li>
+				<li>1688批发网</li>
+				<li>何金昌旗舰店</li>
+				<li>楚天运动频道</li>
+				<li>更多</li>
+			</ul>
+			<ul class="u2">
+				<li>About AOKANG</li>
+				<li>品牌介绍</li>
+				<li>招贤纳士</li>
+				<li>手机奥康</li>
+				<li>练习我们</li>
+				<li>网站地图</li>
+				<li>奥康资讯</li>
+				<li class="l8">友情链接</li>
+			</ul>
+			<span>Copyright © 2014 奥康国际电子商务有限公司(aokang.cn) All Rights Reserved    浙ICP备05037901号-5 技术支持:</span>
+			<a href="javascript:;">奥康电商信息技术部</a>
+		</div>
+	</body>
+</html>

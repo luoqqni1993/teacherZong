@@ -1,0 +1,237 @@
+﻿<!doctype html>
+<html>
+<head>
+<meta charset="UTF-8"/>
+<title>demo1</title>
+<style>
+*{
+	padding:0;
+	margin:0;
+}
+#tab{
+	width:400px;
+	height:400px;
+	border:1px solid black;
+	margin:100px auto;
+}
+.tr{
+	border:1px solid black;
+	border-collapse: collapse;
+}
+.td{
+	border:1px solid black;
+}
+.cover{
+	background-color: black;
+}
+.food{
+	background-color: green;
+}
+</style>
+<script src="tool.js"></script>
+<script>
+//检测蛇是否吃到自己身体
+Array.prototype.checkSame = function(arr){
+	for(var i = 1;i<this.length;i++){
+		if(this[i].x == arr.x && this[i].y == arr.y){
+			return true;
+		}
+	}
+	return false;
+}
+
+
+
+
+
+onload = function(){
+	//页面布置
+	var tab = document.getElementById("tab");
+	tab.className = "tr";
+	for(var n = 0;n<20;n++){
+		var tr = document.createElement("tr");
+		for(var i =0;i<20;i++){
+			var td = document.createElement("td");
+			td.className="td";
+			tr.appendChild(td);
+		}
+		tab.appendChild(tr);
+	}
+
+	var game = new Gamer();
+	game.start();
+
+//游戏导演
+	function Gamer(){
+		var self = this;
+		this.snak = null;
+		this.food = null;
+		this.start = function(){
+			document.onkeydown = function(e){
+				e =e||event;
+				var code = e.keyCode||e.which;
+				switch(code){
+					case 38:
+					if(self.snak.dire ==2) return;//禁止往返方向跑
+					self.snak.dire = 0;break;
+					case 39:
+					if(self.snak.dire ==3) return;//禁止往返方向跑
+					self.snak.dire = 1;break;
+					case 40:
+					if(self.snak.dire ==0) return;//禁止往返方向跑
+					self.snak.dire = 2;break;
+					case 37:
+					if(self.snak.dire ==1) return;//禁止往返方向跑
+					self.snak.dire = 3;break;
+				}
+			}
+			//创建蛇
+			this.snak = new Snake().init();
+			//创建食物
+			this.food=this.createFood();
+			//蛇移动
+			this.snak.move();
+
+		}
+		//创造食物
+		this.createFood = function(){
+			var obj = null;
+			do{
+				obj = new Food();
+			} while(!this.checkFood(obj))
+			tab.children[obj.getX()].children[obj.getY()].className="food";
+			return obj;
+		}
+		//检查食物
+		this.checkFood=function(obj){
+			var flag = true;
+			for(var i =0;i< self.snak.body.length;i++){
+				if(self.snak.body[i].x == obj.getX()&&self.snak.body[i].y == obj.getY()){
+					flag = false;
+				}
+			}
+			return flag;
+		}
+		//食物被吃后再生成食物
+		this.newFood=function(){
+			this.food = this.createFood();
+		}
+	}
+	
+
+
+//食物
+	function Food(){
+		var self = this;
+		this.food = {x:setRandom(0,19),y:setRandom(0,19)};
+		this.getX = function(){
+			return self.food.x;
+		}
+		this.getY = function(){
+			return self.food.y;
+		} 
+	}
+
+
+
+//蛇
+	function Snake(){
+		var self = this;
+		//初始化
+		this.init = function(){
+			this.body = [{x:setRandom(0,19),y:setRandom(0,19)}];
+			this.speed = 400;
+			this.print();
+			this.refresh();
+			this.dire = setRandom(0,3);
+			return this;
+		}
+		//蛇的打印
+		this.print = function(){
+			for(var i =0;i<this.body.length;i++){
+				var cd = this.body[i];
+				tab.children[cd.x].children[cd.y].className = "cover";
+			}
+		}
+		//蛇身体更新
+		this.refresh = function(){
+			this.head = this.body[0];
+			this.last = this.body[this.body.length-1];
+			return this;
+		}
+		//蛇的移动
+		this.move = function(){
+			/*
+				运动思路：先把索引指引到蛇的头部，给头部新的索引所指向的表格添加颜色
+						  然后先把蛇尾部的索引所指向的表格删除颜色，然后把索引更改到前一个部位，然后刷新就是运动了
+			*/
+			var next = null;
+			switch(this.dire){
+				case 0://shang 
+					next={x:this.head.x-1,y:this.head.y}; break;
+				case 1://you
+					next={x:this.head.x,y:this.head.y+1}; break;
+				case 2://xia
+					next={x:this.head.x+1,y:this.head.y}; break;
+				case 3://zuo
+					next={x:this.head.x,y:this.head.y-1}; break;
+			}
+			//判断撞墙，如果撞墙，抛出死亡
+			if(next.x > 19||next.x<0||next.y>19||next.y<0){
+				var toast = new Toast("撞墙了");
+				toast.show();
+				this.death();
+			}
+
+			//判断饮食
+			if(next.x == game.food.getX()&&next.y == game.food.getY()){
+				//吃食物
+				this.eat(next);
+				this.speed = Math.max(this.speed-20,100);
+			}else{
+				//不吃食物，正常行走
+				this.go(next);
+			}
+			
+			//判断是否吃到自己
+			if(this.body.checkSame(next)){
+				new Toast("咬蛇自尽").show();
+				this.death();
+			}
+			
+
+			setTimeout(function(){
+				self.move();
+			},this.speed);
+
+		}
+		//蛇吃东西
+		this.eat = function(next){
+			self.body.unshift(next);
+			this.refresh()
+			tab.children[this.head.x].children[this.head.y].className="cover";
+			game.newFood();
+		}
+		//蛇正常行走
+		this.go = function(next){
+			self.body.unshift(next);
+			this.refresh()
+			tab.children[this.head.x].children[this.head.y].className="cover";
+			tab.children[this.last.x].children[this.last.y].className="td";
+			this.body.pop();
+			this.refresh();
+		}
+		//蛇死了
+		this.death = function(){
+			throw new Error("Gameover");
+		}
+
+	}
+
+}	
+</script>
+</head>
+<body>
+	<table id="tab"></table>
+</body>
+</html>

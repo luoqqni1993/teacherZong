@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<script src="js/jquery.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			function result(_arr){
+				var _tag=null;
+				var _obj=null;
+				for(var i=0;i<_arr.length;i++){
+					if(_arr[i].indexOf(" ")>0){
+						_tag=_arr[i].split(" ");
+						for(var n=0;n<_tag.length;n++){
+							if(/^#/.test(_tag[0])){
+								_obj=document.getElementById(_tag[0].replace("#",""));
+							}else if(/^\./.test(_tag[0])){
+								_obj=document.getElementsByTagName(_tag[0].replace(".",""));
+							}
+						}
+					}
+				}
+				return
+			}
+			function selector(_s){
+				var _arr=null;
+				if(_s.indexOf(",")>=0){
+					_arr=_s.split(",");
+					result(_arr);
+				}else{
+					
+				}
+			}
+			$(document).ready(function(){
+				selector("class,lgm");
+			})
+		</script>
+		<title></title>
+	</head>
+	<body>
+		<div></div>
+	</body>
+</html>

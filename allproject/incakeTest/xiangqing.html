@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<link rel="stylesheet" type="text/css" href="css/xiangqing.css"/>
+		<script type="text/javascript">
+				function ChangeOpacity(){
+				this.timer=0;
+				this.main=document.getElementById("main").getElementsByTagName("img")[0];
+				this.big_pic=document.getElementById("big_pic").getElementsByTagName("img")[0];
+				this.list=null;
+				//创建获取图片地址的构造方法
+				this.attr=(function(){
+					var _arr=[];
+					for(var i=0;i<4;i++){
+						_arr[i]="img/cart"+(i+1)+".jpg";
+					}
+					return _arr;
+				})()
+				//创建改变图片透明度的构造方法
+				this.changeOpacity=function(){
+					var _self=this;
+					var _opacity=0.3;
+					function start(){
+						window.clearTimeout(_self.timer);
+						_opacity+=0.03;
+						if(_self.main.style.opacity){
+							_self.main.style.opacity=_opacity;
+						}else{
+							_self.main.style.filter="alpha(opacity="+_opacity*100+")";
+						}
+						if(_opacity<1){
+							_self.timer=window.setTimeout(start,30);
+						}
+					}
+					start();
+				}
+				//创建绑定事件的构造方法
+				this.boundEvent=function(){
+					var _self=this;
+					_self.list=document.getElementById("pic").getElementsByTagName("img");
+					for(var i=0;i<this.list.length;i++){
+						(function(n){
+							_self.list[i].onmouseover=function(){
+								_self.main.src=this.src;
+								_self.main.style.opacity=0.3;
+								_self.big_pic.src=this.src;
+								_self.changeOpacity();
+							}
+						})(i)
+					}
+				}
+				//创建创建图片的构造方法
+				this.createImage=function(n){
+					var imgs="";
+					for(var i=0;i<n;i++){
+						imgs+="<img alt=\"\" src=\""+this.attr[i]+"\"/>";
+					}
+					document.getElementById("pic").innerHTML=imgs;
+					this.boundEvent();
+				}
+				//创建放大镜方法
+				this.magnifier=function(){
+					var _opacity=document.getElementById("opacity");
+					var _mark=document.getElementById("mark");
+					var _main=document.getElementById("main");
+					var _float=document.getElementById("float");
+					var oBig=document.getElementById("big_pic");
+					var oImg=oBig.getElementsByTagName("img")[0];
+					_mark.onmouseenter=function(){
+						_float.style.display="block";
+						oBig.style.display="block";
+					}
+					_mark.onmouseout=function(){
+						_float.style.display="none";
+						oBig.style.display="none";
+					}
+					_mark.onmousemove=function(evt){
+						var e=evt||window.event;
+						console.log(e.offsetY);
+						
+						var l=e.offsetX-(_float.offsetWidth)/2;
+						var t=e.offsetY-(_float.offsetHeight)/2;
+						if(l<0){
+							l=0;
+						}else if(l>=_mark.offsetWidth-_float.offsetWidth){
+							l=_mark.offsetWidth-_float.offsetWidth;
+						}
+						if(t<0){
+							t=0;
+						}else if(t>=_mark.offsetHeight-_float.offsetHeight){
+							t=_mark.offsetHeight-_float.offsetHeight;
+						}
+						_float.style.left=l+"px";
+						_float.style.top=t+"px";
+						var parcentX=l/(_mark.offsetWidth-_float.offsetWidth);
+						var parcentY=t/(_mark.offsetHeight-_float.offsetHeight);
+						oImg.style.left=-parcentX*(oImg.offsetWidth-oBig.offsetWidth)+"px";
+						oImg.style.top=-parcentY*(oImg.offsetHeight-oBig.offsetHeight)+"px";
+					}
+				}
+			}
+				window.onload=function(){
+					new ChangeOpacity().createImage(4);
+					new ChangeOpacity().magnifier();
+				}
+		</script>
+	</head>
+	<body>
+		<div id="top">
+			<span class="a1">欢迎来到印克时光！</span>
+			<span class="a2">周一至周日8:30~21:00</span>
+			<span class="a3">客服热线:400-921-5757</span>
+			<span class="a4">股票代码:837489</span>
+			<span class="a5">0件</span>
+			<span class="a6">登入</span>
+			<span class="a7">注册</span>
+			<span class="a8">上海 ▼</span>
+		</div>
+		<div id="nav">
+			<span class="a1"></span>
+			<ul class="a2">
+				<li>
+					<span class="b1">Cake List</span>
+					<span class="b2">蛋糕馆</span>
+					<div class="b3">
+						<ul>
+							<li class="e">
+								<span class="d1">Chess</span>
+								<span class="d2">芝士系列</span>
+							</li>
+							<li class="e">
+								<span class="d1">Chess</span>
+								<span class="d2">芝士系列</span>
+							</li>
+							<li class="e">
+								<span class="d1">Chess</span>
+								<span class="d2">芝士系列</span>
+							</li>
+							<li class="e">
+								<span class="d1">Chess</span>
+								<span class="d2">芝士系列</span>
+							</li>
+							<li class="e">
+								<span class="d1">Chess</span>
+								<span class="d2">芝士系列</span>
+							</li>
+							<li class="e">
+								<span class="d1">Chess</span>
+								<span class="d2">芝士系列</span>
+							</li>
+							<li class="e">
+								<span class="d1">Chess</span>
+								<span class="d2">芝士系列</span>
+							</li>
+							<li class="e">
+								<span class="d1">Chess</span>
+								<span class="d2">芝士系列</span>
+							</li>
+						</ul>
+					</div>
+				</li>
+				<li class="c"></li>
+				<li>
+					<span class="b1">Genius at work</span>
+					<span class="b2">GAW蛋糕</span>
+					<div class="b3">
+						<ul>
+							<li class="e">
+								<span class="d1">Chess</span>
+								<span class="d2">芝士系列</span>
+							</li>
+							<li class="e">
+								<span class="d1">Chess</span>
+								<span class="d2">芝士系列</span>
+							</li>
+							<li class="e">
+								<span class="d1">Chess</span>
+								<span class="d2">芝士系列</span>
+							</li>
+						</ul>
+					</div>
+				</li>
+				<li class="c"></li>
+				<li>
+					<span class="b1">Insweet</span>
+					<span class="b2">思密</span>
+				</li>
+				<li class="c"></li>
+				<li>
+					<span class="b1">Activites</span>
+					<span class="b2">活动专享</span>
+					<div class="b3">
+						<ul>
+							<li class="e">
+								<span class="d1">Chess</span>
+								<span class="d2">芝士系列<span>
+							</li>
+							<li class="e">
+								<span class="d1">Chess</span>
+								<span class="d2">芝士系列</span>
+							</li>
+						</ul>
+					</div>
+				</li>
+				<li class="c"></li>
+				<li>
+					<span class="b1">My Incake</span>
+					<span class="b2">我的INCAKE</span>
+					<div class="b3">
+						<ul>
+							<li class="e">
+								<span class="d1">Chess</span>
+								<span class="d2">芝士系列</span>
+							</li>
+							<li class="e">
+								<span class="d1">Chess</span>
+								<span class="d2">芝士系列</span>
+							</li>
+							<li class="e">
+								<span class="d1">Chess</span>
+								<span class="d2">芝士系列</span>
+							</li>
+						</ul>
+					</div>
+				</li>
+				<li class="c"></li>
+				<li>
+					<span class="b1">Enterprises</span>
+					<span class="b2">企业专区</span>
+					<div class="b3">
+						<ul>
+							<li class="e">
+								<span class="d1">Chess</span>
+								<span class="d2">芝士系列</span>
+							</li>
+							<li class="e">
+								<span class="d1">Chess</span>
+								<span class="d2">芝士系列</span>
+							</li>
+						</ul>
+					</div>
+				</li>
+			</ul>
+		</div>
+		<div id="xiangqing">
+			<div id="opacity">
+				<div id="main" class="main">
+					<span id="mark" class="mark"></span>
+					<span id="float" class="float"></span>
+					<img alt="" src="img/cart1.jpg"/>
+				</div>
+				<span class="explain">鼠标移至图片上可放大产品</span>
+				<div id="pic" class="pic"></div>
+				<div id="big_pic" class="big_pic">
+				<img alt="" src="img/cart1.jpg"/>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>

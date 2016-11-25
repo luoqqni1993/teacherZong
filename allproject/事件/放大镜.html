@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="js/jquery.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			$(document).ready(function(){
+				$("#_small").mousemove(function(evt){
+					var e=evt||window.event;
+					var X=e.clientX;
+					var Y=e.clientY;
+					var curre=$(this).position();
+					var iLeft=curre.left;
+					var iTop=curre.top;
+					var l=X-iLeft;
+					var t=Y-iTop;
+					if(l<0){
+						l=0;
+					}
+					if(t<0){
+						t=0;
+					}
+					$(".float").css({"display":"block","left":l-25+"px","top":t-25+"px"});
+				})
+				$("#_small").mouseout(function(){
+					$(".float").css("display","none");
+				})
+				
+			})
+		</script>
+		<style>
+			#_small{width:200px;height:300px;position:relative;}
+			#_big{width:200px;height:300px;}
+			.float{width:50px;height:50px;float:left;position:absolute;border:1px solid black;display:none;}
+		</style>
+	</head>
+	<body>
+		<div>
+			<div id="_small">
+				<span class="float"></span>
+				<img src="img/未标题-2.png" >
+			</div>
+			<div id="_big">
+				<img src="img/54.jpg">
+			</div>
+		</div>
+	</body>
+</html>

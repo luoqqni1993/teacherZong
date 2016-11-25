@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+		<script src="js/lbt.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/jquery.js" type="text/javascript" charset="utf-8"></script>
+		<link rel="stylesheet" type="text/css" href="css/style.css"/>
+		<script type="text/javascript">
+			function dealData(data,e,s,a){
+				var _span=null,_img=null,_a=null;
+				var _container=document.getElementById("tupian");
+				for(var i=e;i<s&&i<data["images"].length;i++){
+					_img=document.createElement("img");
+					_span=document.createElement("span");
+					_img.src="img/cart"+(i+1)+".jpg";
+					_span.appendChild(_img);
+					_a=document.createElement("a");
+					_a.innerText="购买";
+					_a.href="xiangqing.html";
+					_span.appendChild(_a);
+					_container.appendChild(_span);
+				}
+			}
+			function loadImage(e,s){
+				$.post("js/list.json",null,function(data,textStatus){
+					dealData(data,e,s);
+				},"json")
+			}
+			
+			window.onload=function(){
+				  var _slider=new Slider({
+       	 			"img1":"img/img1.jpg",
+        			"img2":"img/img2.jpg",
+        			"img3":"img/img3.jpg",
+        			"img4":"img/img4.jpg",
+        			"img5":"img/img5.jpg",
+        			"img6":"img/img6.jpg"
+   	 		},100,30);
+    		_slider.createDom();
+   			 _slider.initCss();
+   			 var _timer=window.setTimeout(function(){_slider.autoRun();},2000);
+   			 document.getElementById("a_l").onclick=function(){
+      		  window.clearTimeout(_timer);
+        	_slider.leftRun();
+       		 _timer=window.setTimeout(function(){_slider.autoRun();},2000);
+   		 	}
+   			 document.getElementById("a_r").onclick=function(){
+       		 window.clearTimeout(_timer);
+       	 	_slider.rightRun();
+        	_timer=window.setTimeout(function(){_slider.autoRun();},2000);
+   		 	}
+   			 var _points=document.getElementById("circle").getElementsByTagName("span");
+   			 for(var i=0;i<_points.length;i++) {
+        			(function (n) {
+           				_points[i].onclick = function () {
+               		 	window.clearTimeout(_timer);
+                		_slider.circleClick(n);
+               		 	_timer=window.setTimeout(function(){_slider.autoRun();},2000);
+           	 		}
+        		})(i);
+   		 	}
+   			var e=0,s=8;
+			loadImage(e,s);
+		}
+		</script>
+	</head>
+	<body>
+		<div id="top">
+			<span class="a1">欢迎来到印克时光！</span>
+			<span class="a2">周一至周日8:30~21:00</span>
+			<span class="a3">客服热线:400-921-5757</span>
+			<span class="a4">股票代码:837489</span>
+			<span class="a5">0件</span>
+			<span class="a6">登入</span>
+			<span class="a7">注册</span>
+			<span class="a8">上海 ▼</span>
+		</div>
+		<div id="nav">
+			<span class="a1"></span>
+			<ul class="a2">
+				<li>
+					<span class="b1">Cake List</span>
+					<span class="b2">蛋糕馆</span>
+					<div class="b3">
+						<ul>
+							<li class="e">
+								<span class="d1">Chess</span>
+								<span class="d2">芝士系列</span>
+							</li>
+							<li class="e">
+								<span class="d1">Chess</span>
+								<span class="d2">芝士系列</span>
+							</li>
+							<li class="e">
+								<span class="d1">Chess</span>
+								<span class="d2">芝士系列</span>
+							</li>
+							<li class="e">
+								<span class="d1">Chess</span>
+								<span class="d2">芝士系列</span>
+							</li>
+							<li class="e">
+								<span class="d1">Chess</span>
+								<span class="d2">芝士系列</span>
+							</li>
+							<li class="e">
+								<span class="d1">Chess</span>
+								<span class="d2">芝士系列</span>
+							</li>
+							<li class="e">
+								<span class="d1">Chess</span>
+								<span class="d2">芝士系列</span>
+							</li>
+							<li class="e">
+								<span class="d1">Chess</span>
+								<span class="d2">芝士系列</span>
+							</li>
+						</ul>
+					</div>
+				</li>
+				<li class="c"></li>
+				<li>
+					<span class="b1">Genius at work</span>
+					<span class="b2">GAW蛋糕</span>
+					<div class="b3">
+						<ul>
+							<li class="e">
+								<span class="d1">Chess</span>
+								<span class="d2">芝士系列</span>
+							</li>
+							<li class="e">
+								<span class="d1">Chess</span>
+								<span class="d2">芝士系列</span>
+							</li>
+							<li class="e">
+								<span class="d1">Chess</span>
+								<span class="d2">芝士系列</span>
+							</li>
+						</ul>
+					</div>
+				</li>
+				<li class="c"></li>
+				<li>
+					<span class="b1">Insweet</span>
+					<span class="b2">思密</span>
+				</li>
+				<li class="c"></li>
+				<li>
+					<span class="b1">Activites</span>
+					<span class="b2">活动专享</span>
+					<div class="b3">
+						<ul>
+							<li class="e">
+								<span class="d1">Chess</span>
+								<span class="d2">芝士系列<span>
+							</li>
+							<li class="e">
+								<span class="d1">Chess</span>
+								<span class="d2">芝士系列</span>
+							</li>
+						</ul>
+					</div>
+				</li>
+				<li class="c"></li>
+				<li>
+					<span class="b1">My Incake</span>
+					<span class="b2">我的INCAKE</span>
+					<div class="b3">
+						<ul>
+							<li class="e">
+								<span class="d1">Chess</span>
+								<span class="d2">芝士系列</span>
+							</li>
+							<li class="e">
+								<span class="d1">Chess</span>
+								<span class="d2">芝士系列</span>
+							</li>
+							<li class="e">
+								<span class="d1">Chess</span>
+								<span class="d2">芝士系列</span>
+							</li>
+						</ul>
+					</div>
+				</li>
+				<li class="c"></li>
+				<li>
+					<span class="b1">Enterprises</span>
+					<span class="b2">企业专区</span>
+					<div class="b3">
+						<ul>
+							<li class="e">
+								<span class="d1">Chess</span>
+								<span class="d2">芝士系列</span>
+							</li>
+							<li class="e">
+								<span class="d1">Chess</span>
+								<span class="d2">芝士系列</span>
+							</li>
+						</ul>
+					</div>
+				</li>
+			</ul>
+		</div>
+		<div id="container">
+			 <div id="slider"></div>
+        		<div id="arrow">
+            	<span id="a_l">&lt;</span>
+            	<span id="a_r">&gt;</span>
+        	</div>
+        	<div id="circle"></div>
+		</div>
+		<div id="tuijian">
+			<span class="a">精品推荐 Recommend Products</span>
+		</div>
+		<div id="list">
+			<div id="tupian">
+				
+			</div>
+		</div>
+		<div id="datu">
+			
+		</div>
+		<div id="tuijian2">
+			<span class="a">定制蛋糕 DIY Cake</span>
+		</div>
+		<div id="list2">
+			<div id="tupian1">
+				
+			</div>
+		</div>
+	</body>
+</html>

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="js/jquery.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			function toggleClass(_name){
+				if($("div")[0].className==_name){
+					$("div").removeClass(_name);
+				}else{
+					$("div").addClass(_name);
+				}
+			}
+			$(document).ready(function(){
+				toggleClass("lgm");
+			})
+		</script>
+	</head>
+	<body>
+		<div></div>
+	</body>
+</html>

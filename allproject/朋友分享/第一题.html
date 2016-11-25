@@ -1,0 +1,93 @@
+﻿ <script>
+ /*var str="welcome tu beijing come on baby  here come";
+ var str1=str.substring(0,7);
+ var str2=str.substring(7);
+ var reg=new RegExp("come","g");
+ var str3=str2.replace(reg,"");
+ var str4=str1.concat(str3);
+ alert(str4);*/
+ </script>
+ <script>
+/*
+ var arr=[0,11,2,2,3,6,7,8,9,11]
+ var arr1=[];
+ for(var i=0;i<arr.length;i++){
+	for(var j=i+1;j<arr.length;j++){
+		if(arr[i]<arr[j]){
+			var num=arr[i];
+			arr[i]=arr[j]
+			arr[j]=num;
+		}
+	}
+ }
+ for(var i=0;i<arr.length;i++){
+     var b=true;
+     if(arr[i]==arr[i+1]){
+	     b=false;
+	 }
+	 if(b){
+	     arr1.push(arr[i]);
+	 }
+ }
+alert(arr1);
+*/
+ </script>
+ <script>
+ /*
+	var str="wo,wj she sjk sjk sdi!";
+	var str1=str.replace(","," ");
+	var str2=str1.replace("!"," ");
+	var str3=str2.split(" ");
+	alert(str3.length);
+*/	
+ </script>
+
+ <h1 id="jishi"><span>00</span>时<span>00</span>分<span>00</span>秒<span>00</span>毫秒</h1>
+ <button id="btn">开始</button>
+ <script>
+ 
+	var timer;
+	var sum=1; 
+	var jiShi=document.getElementById('jishi');
+	var oSpan=jiShi.children;
+	var i=0;
+	btn.onclick=function(){
+		sum++;
+		function Time(){
+		oSpan[0].innerHTML=fun1(parseInt((i/3600)%24));
+		oSpan[1].innerHTML=fun1(parseInt((i/60)%60));
+		oSpan[2].innerHTML=fun1(parseInt(i%60));
+		oSpan[3].innerHTML=fun1(i);
+		i++;
+		}
+		function fun1(num){
+			 if(num<10){
+				num="0"+num;
+			 }
+			 return num;
+		}
+		if(sum%2!=0){
+			clearInterval(timer);
+			btn.innerHTML="关闭";
+		}else{
+			timer=setInterval(Time,1);
+			btn.innerHTML="开始";
+		}
+	}
+	
+	
+ </script>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 

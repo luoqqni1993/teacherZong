@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+		<script src="js/jquery.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			function demo(){
+				console.log($("div,span,p.myClass"));
+			}
+			$(document).ready(function(){
+				demo();
+			})
+		</script>
+	</head>
+	<body>
+		<div>div</div>
+		<p class="myClass">p class="myClass"</p>
+		<span>span</span>
+		<p class="notMyClass">p class="notMyClass"</p>
+	</body>
+</html>

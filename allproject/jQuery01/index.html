@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+		<script src="js/jquery.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			function demo(){
+				//console.log($("#demo span"));
+				//console.log($("#demo .demo"));
+				console.log($(".demo div"));
+				//console.log($("#demo span.demo"));
+				//console.log($("div.demo span,#demo span"));
+				
+			}
+			$(document).ready(function(){
+				demo();
+			});
+		</script>
+	</head>
+	<body>
+		<div id="demo">
+			<span>
+				<span class="demo"></span>
+			</span>
+		</div>
+		<div class="demo">
+			<div></div>
+			<span>
+				<span class="demo"></span>
+			</span>
+		</div>
+		<div class="demo">
+			<span></span>
+			<div>
+				<span class="demo"></span>
+			</div>
+		</div>
+	</body>
+</html>

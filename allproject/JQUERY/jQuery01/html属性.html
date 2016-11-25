@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="js/jquery.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			function demo(){
+				//$('p').html("Hello <b>world</b>!");
+				$("p").html(function(){return "1111111111"})
+			}
+			$(document).ready(function(){
+				demo();
+			})
+		</script>
+	</head>
+	<body>
+		<p></p>
+	</body>
+</html>

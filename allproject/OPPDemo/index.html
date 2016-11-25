@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+		<script type="text/javascript">
+//		var obj=new Object();
+//		obj.name="zhangsan";
+//		obj.age=18;
+//		obj.showName=function(){
+//			return this.name;
+//		}
+//		obj.showAge=function(){
+//			return this.age;
+//		};
+//		alert(obj.name);
+//		alert(obj.age);
+//		alert(obj.showName());
+//		alert(obj.showAge());
+		//工厂模式
+		function createObject(name,age){
+			//原料
+			var obj=new Object();
+			//加工
+			obj.name=name;
+			obj.age=age;
+			obj.showName=function(){
+			return this.name;
+			}
+			obj.showAge=function(){
+			return this.age;
+			};
+			//出厂
+			return obj
+		}
+		var obj1=createObject("zhangsan",18);
+		alert(obj1.showName());
+		var obj2=createObject("li",18);
+			alert(obj2.showAge());
+		//工厂模式缺点
+		//1无法识别对象的类别；
+		//2没有用new创建对象，看起来和普通函数一样，无法直观的看出这个变量是对象。
+		</script>
+	</head>
+	<body>
+		
+	</body>
+</html>

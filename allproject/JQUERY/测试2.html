@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			div{background:brown;width:50px;height:200px;}
+		</style>
+		<script type="text/javascript"  src="js/jquery-1.11.0.js"></script>
+		<script type="text/javascript">
+		$(document).ready(function(){
+		//	console.log($("input[type='checkbox']").parent().is("form"))
+//			$("p").append( $("input").map(function(){
+//					return $(this).val();
+//			}).get().join(", ") );
+
+//		$('li').has("ul").css("background-color","aquamarine")
+//	function css(_parm){
+//		_parm.width(0,100);
+//		_parm.width(0,document.getElementsByTagName("div")[0].clientWidth);
+//		
+//	}
+//	var _obj={
+//		width: function(index,value){
+//		
+//			return  parseFloat(value)*1.2
+//		},
+//		height: function(index,value){
+//			return parseFloat(value)*1.2
+//		}
+//	}
+//	_obj.width(0,100);
+//	css(_obj);
+//	
+	$("div").click(function(){
+		$(this).css({
+			width: function(index,value){
+			return  parseFloat(value)*1.2
+		},
+		height: function(index,value){
+			return parseFloat(value)*1.2
+		}
+		})
+	})
+	
+	
+	
+		})
+			
+		</script>
+	</head>
+	<body>
+		<div></div>
+		<!--<form><input type="checkbox" /></form> --> 
+		<!--<p><b>Values: </b></p>-->
+<!--<form>
+  <input type="text" name="name" value="John"/>
+  <input type="text" name="password" value="password"/>
+  <input type="text" name="url" value="http://ejohn.org/"/>
+</form>-->
+<!--<ul>
+  <li>list item 1</li>
+  <li>list item 2
+    <ul>
+      <li>list item 2-a</li>
+      <li>list item 2-b</li>
+    </ul>
+  </li>
+  <li>list item 3</li>
+  <li>list item 4</li>
+</ul>-->
+
+	</body>
+</html>

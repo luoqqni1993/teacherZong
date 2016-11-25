@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script type="text/javascript">
+			/*
+			 * 全局作用域
+			 * 函数作用域
+			 * 块级作用域 JS本身并不存在块级作用域，除函数外，用大括号封装的代码叫块级作用域，在这个大括号中声明的变量只能在
+这个大括号内有效
+			 */
+			function box(){
+				(function(){
+					for(var i=1;i<6;i++){
+						alert(i);
+					}
+				})();//自执行的匿名函数仿块级作用域
+				alert(i);
+			}
+			//box();
+			
+			(function(){
+				var a=3;
+				var b=5;
+				alert(a+b);
+			})();
+			
+			(function(){
+				var a=4;
+				var b=8;
+				alert(a*b);
+			})();
+			
+			
+
+		</script>
+	</head>
+	<body>
+	</body>
+</html>

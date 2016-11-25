@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script type="text/javascript">
+			function Box(){
+				var name="xm";//私有变量
+				var age="18";//私有变量
+				function run(){//私有函数
+					return "奔跑";
+				}
+				//给外面提供了一个公共的访问接口(特权接口)
+				this.publicGo=function(){
+					return name+age+run();
+				}
+				this.showAge=function(){
+					return age;
+				}
+			}
+			var box=new Box();
+			alert(box.publicGo());
+			alert(box.showAge());
+		</script>
+	</head>
+	<body>
+	</body>
+</html>

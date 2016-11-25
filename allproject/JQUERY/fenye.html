@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			  body{ margin:0 auto;}
+       		 #fenye{ 
+       		 	width:1000px;
+       		 	 height:200px; 
+       		 	 overflow:hidden; 
+       		 	 margin:0 auto;}
+        	#fenye span{
+	        	display:block; 
+	        	width:172px; 
+	        	height:172px; 
+	        	padding:3px; 
+	        	border:solid 1px #ccc;
+	        	float:left; 
+	        	margin:10px; 
+	        	display:inline;
+        	  }
+        	#fenye span img{ 
+	        	width:172px; 
+	        	height:172px; 
+	        	border:none; 
+	        	float:left;
+        	}
+
+        	#button{ 
+	        	width:1000px; 
+	        	height:40px; 
+	        	margin:0 auto; 
+	        	overflow:hidden;
+        	}
+        	#button span.root{ 
+	        	display:block;
+	        	width:180px; 
+	        	height:40px; 
+	        	overflow:hidden;
+	        	margin:0 auto;
+        	  }
+        	#button span span{ 
+        		background: grey;
+	        	display:block; 
+	        	width:28px; 
+	        	height:28px; 
+	        	overflow:hidden;
+	        	border:solid 1px #ccc; 
+	        	float:left; 
+	        	margin-left:5px; 
+	        	display:inline; 
+	        	line-height:30px; 
+	        	font-size:16px; 
+	        	color:mistyrose; 
+	        	text-align:center;
+	        	cursor:pointer;
+        	  }
+		</style>
+		<script src="js/jquery-2.1.0.js"></script>
+		<script type="text/javascript">
+		function createImg(_s,_e){  //加载图片
+					$.post("js/fenye.json",null,function(data){
+						dealData(data,_s,_e);
+					},"json")
+			 }
+			function dealData(data,_s,_e){//获取数据
+				var fenye=document.getElementById("fenye");
+				for(var i=_s;i<_e&&i<data["images"].length;i++){
+					var _img=null;
+					var _span=null;
+					for(var i=_s;i<_e;i++){
+						_span=document.createElement("span");
+						_img=document.createElement("img");
+						_img.src="img/"+(i+1)+".jpg"
+						_span.appendChild(_img);
+						fenye.appendChild(_span);
+					}
+				}
+			}
+			function pushButton(n){  //添加按钮
+	            var _span=null;
+	            var _root=document.createElement("span");
+	            _root.className="root";
+	            var _button=document.getElementById("button");
+	            _button.appendChild(_root);
+	            for(var i=0;i<n;i++){
+	                _span=document.createElement("span");
+	                _span.innerText=i+1;
+	                _root.appendChild(_span);
+	            }
+            	boundEvent(_root);
+        	}
+			function boundEvent(_root){//给按钮添加事件
+            	for(var i=0;i<_root.children.length;i++){
+                	_root.children[i].onclick=function(){
+                    	var fenye=document.getElementById("fenye");
+                    	fenye.innerHTML="";
+                    	createImg((parseInt(this.innerText)-1)*5,parseInt(this.innerText)*5);
+                    	changeButtonText(_root,this);
+                	}
+            	}
+        	}
+			function changeButtonText(_root,_current){//点击按钮实现分页
+            var _length=_root.children.length;
+            if(_current===_root.children[_length-1]){
+                if(parseInt(_current.innerText)<15) {
+                    for (var i = 0; i < _length; i++) {
+                        _root.children[i].innerText = parseInt(_current.innerText) - 2 + i;
+                        if(parseInt(_root.children[i].innerText)>15){
+                            _root.children[i].style.display="none";
+                        }
+                    }
+                }
+            }
+            if(_current===_root.children[0]){
+                var _value=parseInt(_current.innerText);
+                if(_value-2>0) {
+                    for (var i = 0; i < _length; i++) {.
+                        _root.children[i].innerText = _value - 2 + i;
+                        _root.children[i].style.display="block";
+                    }
+                }
+            }
+
+        }
+			
+			
+			$(document).ready(function(){
+				var _s=0;
+				var _e=5;
+				createImg(_s,_e);
+				pushButton(5)
+			})
+		</script>
+	</head>
+	<body>
+		    <div id="fenye">
+
+    </div>
+    <div id="button"></div>
+		
+	</body>
+</html>

@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>waterfall</title>
+    <style type="text/css">
+			body{margin: 0 auto;}
+			#container{width: auto;height: auto;border: solid 3px #f1f1f1;position: relative;margin: 0 auto;}
+			.module{width: 150px;height: auto;padding: 2px;overflow: hidden;position: absolute;}
+			div img{width: 150px;border: none;float: left;}
+			div span{width: 100%;height: 30px;line-height: 30px;text-align: center;display: block;float: left;}
+			
+		</style>
+    <script type="text/javascript" src="js/jquery-2.1.0.js"> </script>
+    <script type="text/javascript">
+    	$(document).ready(function(){
+    		 var geshu=initCss();
+    		 initArray(geshu);
+    		createImg();
+    		//resetContainerHeight();
+    	});
+    	window.onscroll=function(){
+    		var _total=$(document).height();
+    		var s_t=$(document).scrollTop();
+    		var w_h=$(window).height();
+    		if(_total==s_t+w_h){
+    			_s=_s+40;
+    			createImg();
+    		}
+    	}
+
+    	window.onresize=function(){
+    		var geshu=initCss();
+    		initArray(geshu);
+    		waterfall(0);
+    	}
+    	
+    	
+    	function resetContainerHeight(){
+    		var max=arr[0]
+    		for(var i=0;i<+arr.length;i++){
+    			if(max<arr[i]){
+    				max=arr[i];
+    			}
+    		}
+    		$("container").css("height",max+"px")
+    	}
+    	
+    	
+    	
+    	var _s=0;//记录当前需要从第几张图片加载
+    	var arr=[];
+    	function initArray(g){
+    		arr=new Array(g)
+    		for(var i=0;i<g;i++){
+    			arr[i]=0;
+    		}
+    	}
+    	function createImg(){  //加载图片
+					$.post("js/waterfall.json",null,function(data){
+						dealData(data);
+						checkCop();
+						//resetContainerHeight();
+					},"json")
+			 }
+    	
+    	 function checkCop(){//检测图片加载是否完成
+    		 	var list=$("#container img").get();
+    		 	var _timer=0;
+    		 		checking();
+    		 	function checking(){
+    		 		window.clearTimeout(_timer)
+    		 		var _complete=true;
+	    		 	 //默认图片加载完成
+	    		 	for(var i=_s;i<list.length;i++){
+	    		 		if(!list[i].complete){    //img 自由的一个属性  当未加载完成期间，该属性值为false;反之为true;
+	    		 			_complete=false;
+	    		 			break;
+	    		 		}
+	    		 	}
+	    		 	if(_complete){//如果加载完成，执行waterfall
+	    		 		waterfall(_s);
+	    		 	}else{
+	    		 		_timer=window.setTimeout(checking,90)
+	    		 	}
+    		 	  
+    		 }
+    		 checking();
+    	}
+    	
+    	function minHeight(){
+    		 	var n=0;//索引值
+    		 var	min=arr[0];//把数组第一个值赋给min
+    		 
+    		 	for(var i=1;i<arr.length;i++){//循环判断min是不是最小高度  ，如果不是，把数组索引值赋给n
+    		 		if(min>arr[i]){
+    		 			min=arr[i];
+    		 			n=i;
+    		 		}
+    		 	}
+    		 	return n;
+    		 }
+    	
+    	function waterfall(s){
+    		 	var n=0;
+    		 	var list=$(".module").get();
+    		 	for(var i=s;i<list.length;i++){
+    		 		n=minHeight();
+    		 		$(list[i]).css({"left":n*154+"px","top":arr[n]+"px"})
+    		 		arr[n]+=list[i].offsetHeight
+    		 	}
+    		 }
+    	
+    	function dealData(data){//处理数据
+    		 	var container=document.getElementById("container"); //获取container
+    		 	var _div=null;
+    		 	var _img=null;
+    		 	var _span=null;
+    				 	for(var i=_s;i<_s+40&&i<data["images"].length;i++){
+ 							_img=document.createElement("img");
+ 							_img.src="img/"+(i+1)+".jpg"
+ 							_span=document.createElement("span");
+ 							_span.innerHTML="太他妈难了";
+ 							_div=document.createElement("div")
+ 							_div.className="module";
+ 							_div.appendChild(_img);
+ 							_div.appendChild(_span);
+ 							container.appendChild(_div);
+ 							
+			 	}
+    		 }
+    	
+    	
+    	function initCss(){  //初始化css   设定container  因为要给图片定位，最后一张图片不能超过浏览器宽度
+    		var geshu=Math.floor(($("body").width()-6)/154);//多少列
+    		var w=geshu*154 ;  //浏览器宽度
+    		$("#container").css("width",w+"px");
+    		return geshu;
+    	}
+    	
+    	
+    		 
+    		 
+    		
+    		 
+    		 
+    		
+    		 
+    		
+    		
+    		
+    		
+//  		$.ajax({
+//  			url:("js/waterfall.json"),
+//  			async:"true",
+//  			success:function(data){
+//  				
+//  			}
+//  		})
+    	
+    </script>
+</head>
+<body>
+    <div id="container">
+
+    </div>
+</body>
+</html>

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+		<script src="js/jquery.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			$(document).ready(function(){
+				
+				function fn(e){
+					alert(e.date.foo);
+				}
+				$("div")[0].on=function(_type,date,callback){
+					$("div")[0].onclick=function(e){
+						e.date=date;
+						callback(e);
+					}
+				}
+				$("div")[0].on("click",{foo:"demo"},fn);
+//				$("div").on("click",function(evt){
+//					var e=evt||window.event;
+//					alert("div");
+//				})
+			})
+		</script>
+	</head>
+	<body>
+		<div style="width:100px;height:100px;background:red;"></div>
+	</body>
+</html>

@@ -1,0 +1,49 @@
+*{padding:0px;margin:0px;}
+#top{height:88px;width:1263px;border-bottom:1px solid #cccccc;background:url(../img/ca1-1.png) no-repeat 140px 20px;}
+#top .a1{float:left;font-size:24px;color:#999999;margin-left:423px;margin-top:40px;}
+#top a{float:left;font-size:16px;color:#999999;text-decoration:none;margin-top:48px;}
+#top .a2{margin-left:504px;padding-right:6px;border-right:1px solid #d28f3d;}
+#top .a3{padding-left:6px;border-left:1px solid #338fd4;}
+#cart{height:auto;width:1263px;}
+#cart table{border-collapse:collapse;margin:0 auto;}
+#cart table td{border:1px solid black;font-size:16px;text-align:center;}
+#cart table td img{width:40px;}
+#guide{height:168px;width:1263px;background:#656a76;}
+#guide ul{float:left;margin-top:25px;}
+#guide .b1{margin-left:140px;}
+#guide .b2{margin-left:48px;}
+#guide .b3{margin-left:48px;}
+#guide .b4{margin-left:35px;}
+#guide ul li{list-style-type:none;color:#cccccc;font-size:12px;margin-top:12px;}
+#guide ul .a1{margin-top:0px;font-size:16px;color:#ffffff;}
+#guide .b5{margin-left:25px;}
+#guide ul .a2{font-size:20px;font-weight:bold;color:#f8ccc7;}
+#guide ul .a3{color:#ffffff;}
+#guide ul .a4{color:#ffffff;}
+#guide .b6{float:left;height:130px;width:2px;margin-top:20px;margin-left:40px;background:url(../img/wy-1.png) no-repeat center center;}
+#guide .b7{float:left;font-size:16px;color:#ffffff;margin-left:20px;margin-top:25px;}
+#guide .b8{float:left;font-size:16px;color:#ffffff;margin-left:132px;margin-top:25px;width:190px;}
+#guide .b9{float:left;font-size:12px;color:#ffffff;margin-left:20px;margin-top:12px;}
+#guide .b10{float:left;font-size:12px;color:#ffffff;margin-left:112px;margin-top:12px;width:190px;}
+#guide .b11{float:left;height:60px;width:60px;background:url(../img/wy1-1.png) no-repeat center center;margin-top:13px;margin-left:20px;}
+#guide .b12{float:left;height:60px;width:100px;margin-top:13px;margin-left:8px;}
+#guide .b12 .c1{float:left;height:24px;width:100px;background:url(../img/wy3-1.png) no-repeat center center;}
+#guide .b12 .c2{float:left;height:24px;width:100px;background:url(../img/wuyu4-1.png) no-repeat center center;margin-top:10px;}
+#guide .b13{float:left;height:60px;width:60px;background:url(../img/wuyu2-1.png) no-repeat center center;margin-top:13px;margin-left:50px;}
+#end{height:117px;width:1263px;}
+#end ul{float:left;margin-left:141px;margin-top:20px;width:1123px;}
+#end li{float:left;list-style-type:none;padding-left:40px;height:34px;line-height:34px;}
+#end .b1{background:url(../img/e1-1.png) no-repeat left center;margin-right:38px;}
+#end .b2{background:url(../img/e2-1.png) no-repeat left center;margin-right:44px;}
+#end .b3{background:url(../img/e3-1.png) no-repeat left center;margin-right:7px;}
+#end .b4{background:url(../img/e4-1.png) no-repeat left center;margin-right:7px;}
+#end .b5{background:url(../img/e5-1.png) no-repeat left center;}
+#end li a{font-size:14px;text-decoration:none;font-weight:bold;}
+#end li .a1{color:#e64e3e;}
+#end li .a2{color:#747474;}
+#end li .a2:hover{color:#e64e3e;}
+#end span{float:left;font-size:10px;margin-top:22px;color:#33383d;}
+#end .s1{margin-left:141px;}
+#end .s2{margin-left:36px;}
+#end .s3{color:#ff3300;margin-left:4px;}
+

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script type="text/javascript">
+			/*
+			 * 如何把大象装进冰箱
+			 * 面向过程：
+			 * 1 打开冰箱
+			 * 2把大象塞进去
+			 * 3关上冰箱
+			 * 
+			 * 面向对象
+			 * 1创建一个冰箱对象
+			 * 2创建一个大象对象
+			 * 3创建方法将大象装进冰箱
+			 * 
+			 * 有一辆车，速度是20KM/H，跑在一条1000KM的路上，问要多少时间
+			 * 
+			 * 面向过程   时间=路程/速度     体现了一种数学思想
+			 * 面向对象
+			 * 创建一条路，给线路设置属性（长度）
+			 * 创建一辆车，给车设置属性（速度）
+			 * 给车创建一个方法，让车辆在这个路的对象上，求出时间
+			 * 
+			 * 盖房子
+			 * 
+			 * 面向过程
+			 * 备料——打地基——砌墙——封顶——装修        体现了亲力亲为
+			 * 
+			 * 面向对象：
+			 * 找一个建筑队——找一个装修公司     体现了指挥者
+			 */
+			var arr=new Array(1,2,3,4,5);
+			arr.value=8;
+			alert(arr.value);
+			
+			arr.sum=function(){
+				var mySum=0;
+				for(var i=0;i<arr.length;i++){
+					mySum+=arr[i];
+				}
+				return mySum;
+			}
+			alert(arr.sum());
+			var list=new Array(1,2,3,4,5,7,5);
+			alert(list.sum());
+		</script>
+	</head>
+	<body>
+	</body>
+</html>

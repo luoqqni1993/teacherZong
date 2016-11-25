@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script type="text/javascript">
+			function Person(name,age){
+			this.name=name;
+			this.age=age;
+			this.showName=function(){
+			return this.name;
+			};
+			this.showAge=function(){
+			return this.age;
+			};
+		}
+		var ps1=new Person("zhangsan",18);
+		var ps2=new Person("zhangsan",18);
+		alert(ps1.name==ps2.name);
+		alert(ps1.showName()==ps2.showName());
+		alert(ps1.showName== ps2.showName);
+		//构造函数的缺点，不能共享属性和方法，所以没创建一个对象，就会创建相应的属性和方法，造成大量空间浪费。
+		</script>
+	</head>
+	<body>
+	</body>
+</html>

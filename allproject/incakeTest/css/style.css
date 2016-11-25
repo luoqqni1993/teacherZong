@@ -1,0 +1,51 @@
+*{padding:0px;margin:0px;}
+#top{height:46px;width:1263px;}
+#top span{float:left;font-size:12px;color:#969696;margin-top:14px;}
+#top .a1{margin-left:60px;}
+#top .a2{margin-left:46px;}
+#top .a3{margin-left:20px;}
+#top .a4{margin-left:20px;color:#0f3677;}
+#top .a5{margin-left:263px;background:url(../img/lanzi-1.png) no-repeat left center;padding-left:25px;color:#505050;height:22px;line-height:22px;margin-top:12px;cursor:pointer;}
+#top .a6{margin-left:40px;padding-right:14px;border-right:1px solid #505050;color:#505050;cursor:pointer;}
+#top .a7{padding-left:14px;border-left:1px solid #505050;color:#505050;cursor:pointer;}
+#top .a8{margin-left:30px;height:28px;width:78px;border:1px solid #505050;color:#505050;border-radius:10%;line-height:28px;text-align:center;margin-top:8px;background:url(../img/zuobiao-1.png) no-repeat 3px 4px;cursor:pointer;}
+#nav{height:85px;width:1263px;}
+#nav .a1{width:182px;height:67px;float:left;background:url(../img/logo-1.png) no-repeat center center;margin-left:50px;}
+#nav .a2{float:left;margin-left:60px;margin-top:20px;}
+#nav .a2 li{float:left;list-style-type:none;height:60px;width:140px;cursor:pointer;position:relative;}
+#nav .a2 .b1{font-size:9px;color:#0f3677;margin-top:16px;float:left;width:140px;text-align:center;}
+#nav .a2 .b2{font-size:16px;color:#0f3677;margin-top:6px;float:left;width:140px;text-align:center;}
+#nav .a2 .b3{position:absolute;top:65px;display:none;}
+#nav .a2 .c{height:28px;width:20px;background:url(../img/xietiao-1.png) no-repeat center center;border:none;margin-top:32px;}
+#nav .a2 li .e{height:56px;width:140px;background:#0f3677;border-bottom:1px solid #19468d;}
+#nav .a2 .d1{width:140px;font-size:14px;color:#82aae6;margin-top:13px;float:left;text-align:center;}
+#nav .a2 .d2{width:140px;font-size:14px;color:#82aae6;margin-top:3px;float:left;text-align:center;}
+#nav .a2 li:hover{border-bottom:5px solid #0f3677;}
+#nav .a2 li:hover .b3{display:block;z-index:1000;}
+#nav .a2 .e:hover span{color:white;}
+img{ border:none; border:0px;}
+#container{ width:1200px; height:580px; overflow:hidden; position:relative;}
+#slider{ width:1200px; height:580px; position:absolute; left:0px; top:0px; z-index:0;}
+#slider img{ width:1200px; height:580px; float:left;}
+
+#arrow{ width:1200px; height:50px; position:absolute; top:50%; margin-top:-25px;cursor:pointer;}
+#arrow span{ display:block; width:50px; height:50px; background-color:#000; color:#fff; float:left; line-height:50px; text-align:center;}
+#a_r{ margin-left:1100px; display:inline;}
+
+#circle{ position:absolute; height:25px; border-radius:5px; background-color:#f1f1f1; top:550px; left:50%;cursor:pointer;}
+#circle span{ display:block; width:15px; height:15px; border-radius:50%; background-color:#ccc; float:left; margin-left:10px; margin-top:5px; display:inline;}
+#tuijian{height:120px;width:1263px;}
+#tuijian .a{float:left;font-size:24px;color:#0f368c;height:40px;line-height:40px;background:url(../img/yinyue-1.png) no-repeat left center;margin-left:448px;margin-top:60px;padding-left:42px;}
+#list{height:800px;width:1263px;}
+#tupian{width:1210px;height:auto;margin:0 auto;}
+#tupian span{display:block;width:230px;height:367px;padding:3px;border:1px solid #dddddd;float:left;display:inline;margin-left:30px;}
+#tupian span img{width:226px;height:226px;float:left;border:none;}
+#tupian span a{float:left;background:red;font-size:16px;height:30px;width:150px;color:#ffffff;line-height:30px;text-align:center;margin-left:30px;margin-top:20px;border-radius:10%;cursor:pointer;}
+#datu{height:148px;width:1263px;background:url(../img/datu-1.png) no-repeat 60px 10px;}
+#tuijian2{height:120px;width:1263px;}
+#tuijian2 .a{float:left;font-size:24px;color:#0f368c;height:40px;line-height:40px;background:url(../img/yinyue-1.png) no-repeat left center;margin-left:448px;margin-top:60px;padding-left:42px;}
+#list2{height:500px;width:1263px;}
+#tupian2{width:1210px;height:auto;margin:0 auto;}
+#tupian2 span{display:block;width:230px;height:367px;padding:3px;border:1px solid #dddddd;float:left;display:inline;margin-left:30px;}
+#tupian2 span img{width:226px;height:226px;float:left;border:none;}
+#tupian2 span a{float:left;background:red;font-size:16px;height:30px;width:150px;color:#ffffff;line-height:30px;text-align:center;margin-left:30px;margin-top:20px;border-radius:10%;cursor:pointer;}

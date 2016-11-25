@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+		<script src="js/jquery.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			$(document).ready(function(){
+				/*$.post("url",null,function(data,textStatus){
+					
+				},"text")
+				$.get();*/
+				$.ajax({ url: "abc.txt", context: document.body, success: function(data){
+					alert(data);
+    				$(this).addClass("done");
+					}});
+			})
+		</script>
+	</head>
+	<body>
+		
+	</body>
+</html>

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="http://10.9.169.187:8080/yansi.txt" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			function cityEvent(m,_city){
+				_city.onchange=function(){	
+				var _options="";
+				var _county=document.getElementById("county");
+				for(var n=0;n<this.children.length;n++){
+					if(this.children[n].selected){
+						for(var i=0;i<a["regions"][m]["regions"][n]['regions'].length;i++){
+							_options+="<option>"+a["regions"][m]["regions"][n]['regions'][i]["name"]+'<option>';
+						}
+						_county.innerHTML=_options;
+					}
+				}
+				
+				}
+			}
+			function provinceEvent(){
+				var _options="";
+				var _city=document.getElementById("city");
+				var _list=this.children;
+				for(var i=0;i<_list.length;i++){
+					if(_list[i].selected){
+						for(var n=0;n<a["regions"][i]["regions"].length;n++){
+							_options+="<option>"+a["regions"][i]["regions"][n]["name"]+"</option>";
+						}
+						_city.innerHTML=_options;
+						cityEvent(i,_city);
+					}
+				}
+			}
+			function readerProvince(){
+				var _options="";
+				for(var i=0;i<a["regions"].length;i++){
+					_options+="<option>"+a["regions"][i]["name"]+"</option>";
+				}
+				var _province=document.getElementById("province");
+				_province.innerHTML=_options;
+				_province.onchange=provinceEvent;
+			}
+			window.onload=function(){
+				readerProvince();
+				console.log(a);
+			}
+		</script>
+	</head>
+	<body>
+	<select id="province"></select>
+	<select id="city"></select>
+	<select id="county"><select>
+	</body>
+</html>

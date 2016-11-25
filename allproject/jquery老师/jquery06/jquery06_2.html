@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script type="text/javascript" src="../H51612/Javascript/jquery.js"></script>
+    <script type="text/javascript">
+
+//        function dealData(data){
+//            console.log(data);
+//        }
+        $(document).ready(function(){
+            //$("#demo").load("head.html");
+            $.post("http://wthrcdn.etouch.cn/weather_mini?city=北京", function(data){
+                alert(typeof data);
+            },"jsonp");
+        });
+    </script>
+<body>
+<div id="demo"></div>
+<img src="" alt="">
+</body>
+</html>

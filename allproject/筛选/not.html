@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="js/jquery.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			function demo(){
+				console.log($("p").not("#selected")[0]);
+			}
+			$(document).ready(function(){
+				demo();
+			})
+		</script>
+	</head>
+	<body>
+		<p>Hello</p><p id="selected"></p>
+	</body>
+</html>

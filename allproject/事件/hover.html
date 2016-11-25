@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<script src="js/jquery.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			$(document).ready(function(){
+//				$("div").hover(
+//					function(){
+//					$(this).css("background","yellow");
+//					},
+//					function(){
+//						$(this).css("background","red");
+//					}
+//				)
+				hover($("div")[0],
+					function(){
+						$(this).css("background","yellow");
+					},
+					function(){
+						$(this).css("background","red");
+					}
+				)
+				function hover(_elem,fn1,fn2){
+					_elem.onmouseover=fn1;
+					_elem.onmouseout=fn2;
+				}
+				
+			})
+		</script>
+		<title></title>
+	</head>
+	<body>
+		<div style="width:100px;height:100px;background:red;"></div>
+	</body>
+</html>

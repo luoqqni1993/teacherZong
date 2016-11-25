@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			div{width:200px;height:200px;background:blueviolet;display:none;border-radius:50% ;}
+		</style>
+		<script src="js/jquery-1.11.0.js"></script>
+		<script type="text/javascript">
+			$(document).ready(function(){
+				animate();
+				function animate(){
+					function show(){
+					$("div").show(2000,function(){
+								hide();	
+					})
+					}
+					function hide(){
+					$("div").hide(2000,function(){
+						show();
+					})
+					}
+					hide();
+				}
+			});
+
+//				slide();
+//	function slide(){
+//		function slideUp(){
+//			$("div").slideUp(3000,function(){
+//				slideDown();
+//			})
+//		}
+//		function slideDown(){
+//			$("div").slideDown(3000,function(){
+//				slideUp();
+//			})
+//		}
+//					slideDown();
+//	}
+//})
+	
+//	function slideToggle(){
+//		$("div").slideToggle(2000,function(){
+//			slideToggle();
+//		});
+//	}
+//	slideToggle();
+	
+//			})
+		</script>
+	</head>
+	<body>
+		<div id="box">
+			
+		</div>
+	</body>
+</html>

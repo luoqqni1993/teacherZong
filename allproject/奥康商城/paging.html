@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<link rel="stylesheet" type="text/css" href="css/paging.css"/>
+		<script src="js/jquery.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			//改变按钮框中的数字
+			function changeButtonText(_root,_current){
+				var _length=_root.children.length;//获取子节点长度
+				if(_current===_root.children[_length-1]){
+					if(parseInt(_current.innerText)<15){
+						for(var i=0;i<_length;i++){
+							_root.children[i].innerText=parseInt(_current.innerText)-2+i;
+							if(parseInt(_root.children[i].innerText)>15){
+								_root.children[i].style.display="none";
+							}
+						}
+					}
+				}
+				if(_current===_root.children[0]){
+					var _val=parseInt(_current.innerText);
+					if(_val-2>0){
+						for(var i=0;i<_length;i++){
+							_root.children[i].innerText=_val-2+i;
+							_root.children[i].style.display="block";
+						}
+					}
+				}
+			}
+			//绑定事件
+			function boundEvent(_root){
+				for(var i=0;i<_root.children.length;i++){
+					_root.children[i].onclick=function(){
+						var _container=document.getElementById("container");
+						_container.innerHTML="";
+						var e=(parseInt(this.innerText)-1)*30;
+						var s=parseInt(this.innerText)*30;
+						loadImage(e,s);
+						changeButtonText(_root,this);
+					}
+				}
+			}
+			//加载按钮
+			function loadButton(n){
+				var _span=null;
+				var _button=document.getElementById("button");
+				var _root=document.createElement("span");
+				_root.className="root";
+				for(var i=0;i<n;i++){
+					_span=document.createElement("span");
+					_span.innerText=i+1;
+					_root.appendChild(_span);
+					_button.appendChild(_root);
+				}
+				boundEvent(_root);
+			}
+			//插入节点
+			function dealData(data,e,s){
+				var _span=null,_img=null,_a=null;
+				var _container=document.getElementById("container");
+				for(var i=e;i<s&&i<data["images"].length;i++){
+					_img=document.createElement("img");
+					_span=document.createElement("span");
+					_img.src="img/cart"+(i+1)+"-1.png";
+					_span.appendChild(_img);
+					_a=document.createElement("a");
+					_a.innerText="购买";
+					_span.appendChild(_a);
+					_container.appendChild(_span);
+				}
+			}
+			//加载图片
+			function loadImage(e,s){
+				$.post("js/page.json",null,function(data,textStatus){
+					dealData(data,e,s);
+				},"json")
+			}
+			$(document).ready(function(){
+				var e=0,s=30;
+				loadImage(e,s);
+				loadButton(5);
+			})
+		</script>
+	</head>
+	<body>
+		<div id="com-area-topnav">
+			<p>奥康国际(<span>603001</span>)官方唯一商城!4009-603001</p>
+			<a class="login" href="Logins.html" target="_blank"><img src="img/enter.png"></a>
+			<a class="register" href="register.html" target="_blank">[<span>快速注册</span>]</a>
+			<ul class="right-nav">
+				<li class="a1"><a href="userCenter.html" target="_blank">个人中心</a></li>
+				<li class="a2"><a href="javascript:;">信息(0)</a></li>
+				<li class="a3"><a href="javascript:;">企事业团购</a></li>
+				<li class="a4"><a href="javascript:;">网站导航</a></li>
+				<li class="a5"><a href="javascript:;">手机版</a></li>
+				<li class="a6"><a href="javascript:;">新手帮助</a></li>
+				<li class="a7"><a href="javascript:;">会员秀</a></li>
+			</ul>
+		</div>
+		<div id="com-area-header">
+			<ul class="phoneak">
+				<li>手</li>
+				<li>机</li>
+				<li>奥</li>
+				<li>康</li>
+			</ul>
+			<img src="img/erweima-1.png">
+			<div class="wrap">
+				<input type="text" class="text" value="请输入搜索关键词">
+				<a href="javascript:;" class="search">搜索</a>
+				<ul class="category">
+					<li><a href="javascript:;">商务男鞋</a></li>
+					<li><a href="javascript:;">男凉鞋</a></li>
+					<li><a href="javascript:;">奥康</a></li>
+					<li><a href="javascript:;">驾车鞋</a></li>
+					<li class="a1"><a href="javascript:;">大牌清仓！</a></li>
+					<li class="a2"><a href="javascript:;">秋季新品</a></li>
+					<li><a href="javascript:;">小白鞋</a></li>
+				</ul>
+			</div>
+			<a href="cart.html" target="_blank" class="shop">购物车(0)</a>
+		</div>
+		<div id="headNav">
+			<ul class="wrap">
+				<li class="b1"><a href="javascript:;">全部商品分类</a></li>
+				<li class="b2"><a href="javascript:;">首页</a></li>
+				<li class="b3"><a href="javascript:;">天天团</a></li>
+				<li class="b4"><a href="javascript:;">新品发布</a></li>
+				<li class="b5"><a href="javascript:;">奥康特惠</a></li>
+				<li class="b6"><a href="javascript:;">积分购</a></li>
+				<li class="b7"><a href="javascript:;">防伪查询</a></li>
+				<li class="b8"><a href="javascript:;">哇！O2O</a></li>
+			</ul>
+		</div>
+		<div id="pag">
+			<div id="container">
+				
+			</div>
+			<div id="button">
+				
+			</div>
+		</div>
+		<img src="img/htimg-1.png"/>
+		<div id="guide">
+			<div class="g1">
+				<h6>奥康承诺</h6>
+				<ul>
+					<li class="l1">
+						<span class="a">正品行货</span>
+						<span class="b">行货正品、奥康旗下唯一官方商城。</span>
+					</li>
+					<li class="l2">
+						<span class="a">闪电发货</span>
+						<span class="b">全国包邮(港澳台除外),最快一天送达。</span>
+					</li>
+					<li class="l3">
+						<span class="a">尊贵服务</span>
+						<span class="b">会员专属折扣与服务，同享线下优惠。</span>
+					</li>
+					<li class="l4">
+						<span class="a">七日退换</span>
+						<span class="b">七日内可自由退换货，并享受国家三包服务。</span>
+					</li>
+				</ul>
+			</div>
+			<div class="g2">
+				<h6>奥康服务</h6>
+				<ul class="u1">
+					<li class="a">新手指南</li>
+					<li>如何注册/登入</li>
+					<li>找回密码</li>
+					<li>会员等级</li>
+					<li>购物保障</li>
+					<li class="b">售后服务</li>
+					<li>退换货流程</li>
+					<li>如何投诉</li>
+					<li>退款说明</li>
+					<li>练习客服</li>
+				</ul>
+				<ul class="u2">
+					<li class="a">购物指南</li>
+					<li>如何购物</li>
+					<li>团购说明</li>
+					<li>企事业单位采购</li>
+					<li>购物常见问题</li>
+					<li class="b">关于奥康商城</li>
+					<li>商城简介</li>
+					<li>奥康资讯</li>
+					<li>人才招聘</li>
+					<li>线下同款</li>
+				</ul>
+				<ul class="u3">
+					<li class="a">支付与配送</li>
+					<li>支付常见问题</li>
+					<li>在线支付</li>
+					<li>配送收费</li>
+					<li>上门服务</li>
+					<li class="b">客服热线</li>
+					<li>4009-603001</li>
+					<li>工作时间</li>
+					<li>9:00-22:00</li>
+					<li>帮助中心</li>
+				</ul>
+			</div>
+			<div class="g3">
+				<h6>关注奥康商城</h6>
+				<ul class="u1">
+					<li class="l1">
+						<span class="a">手机客户端</span>
+						<span class="b">轻松购物，迅速到家！</span>
+						<span class="f1"><img src="img/AppStore-1.png"/></span>
+						<span class="f2"><img src="img/Android-1.png"/></span>
+						<span>
+							<span class="c1">手机登入</span>
+							<a class="d" href="javascript:;">m.aokang.cn</a>
+							<span class="c2">指尖购物</span>
+						</span>
+					</li>
+					<li class="l2">
+						<span class="a">奥康商城官方微信</span>
+						<span class="b">微信扫二维码，随时随地地与我们亲密接触精彩活动，劲爆优惠触手可得！</span>
+					</li>
+				</ul>
+				<ul class="u2">
+					<li class="l3">
+						<span class="c">查看腾讯微博</span>
+						<a class="e" href="javascript:;">立即关注</a>
+					</li>
+					<li class="l4">
+						<span class="c">查看新浪微博</span>
+						<a class="e" href="javascript:;">立即关注</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+		<div id="copyRight">
+			<ul class="u1">
+				<li>友情链接</li>
+				<li>顺丰快递查询</li>
+				<li>家具网上商城</li>
+				<li>淘粉吧</li>
+				<li>品牌资讯</li>
+				<li>客户经理</li>
+				<li>装修效果图</li>
+				<li>1688批发网</li>
+				<li>何金昌旗舰店</li>
+				<li>楚天运动频道</li>
+				<li>更多</li>
+			</ul>
+			<ul class="u2">
+				<li>About AOKANG</li>
+				<li>品牌介绍</li>
+				<li>招贤纳士</li>
+				<li>手机奥康</li>
+				<li>练习我们</li>
+				<li>网站地图</li>
+				<li>奥康资讯</li>
+				<li class="l8">友情链接</li>
+			</ul>
+			<span>Copyright © 2014 奥康国际电子商务有限公司(aokang.cn) All Rights Reserved    浙ICP备05037901号-5 技术支持:</span>
+			<a href="javascript:;">奥康电商信息技术部</a>
+		</div>
+		<div id="panel">
+			<ul>
+				<li><a href="javascript:;">官方推荐</a></li>
+				<li><a href="javascript:;">天天团</a></li>
+				<li><a href="javascript:;">奥康</a></li>
+				<li><a href="javascript:;">奥康女鞋</a></li>
+				<li><a href="javascript:;">康龙</a></li>
+				<li><a href="javascript:;">美丽佳人</a></li>
+				<li><a href="javascript:;">红火鸟</a></li>
+				<li><a href="javascript:;">劲浪</a></li>
+				<li><a href="javascript:;">公子哥</a></li>
+				<li><a href="javascript:;">RIIID</a></li>
+				<li><a href="javascript:;">GOLL谷尔</a></li>
+				<li><a href="javascript:;">幸福猫</a></li>
+			</ul>
+		</div>
+		<div id="widget">
+			<a class="a1" href="javascript:;">收起</a>
+			<a class="a2" href="javascript:;">/展开</a>
+			<a class="a3" href="javascript:;">在线客服</a>
+			<a class="a4" href="javascript:;">有奖调查</a>
+			<a class="a5" href="javascript:;">二维码</a>
+			<a class="a6" href="javascript:;"></a>
+		</div>
+		<img id="fimg" src="img/fewm-1.png"/>
+	</body>
+	</body>
+</html>

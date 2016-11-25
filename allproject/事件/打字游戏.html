@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			*{margin:0px;padding:0px;}
+			div{height:30px;width:30px;border:1px solid black;line-height:30px;text-align:center;position:absolute;}
+		</style>
+		<script type="text/javascript">
+		window.onload=function(){
+			var oDiv=document.getElementsByTagName("div");
+			
+			for(var i=0;i<oDiv.length;i++){
+				var k=Math.floor(Math.random()*26+1);
+				oDiv[i].style.left=k*40+"px";
+				oDiv[i].style.top=0+"px";
+			}
+			document.onkeydown=function(evt){
+				var e=evt||window.event;
+				var n=64;
+				
+				if(e.keyCode==32){
+					setInterval(function(){
+						for(var j=0;j<oDiv.length;j++){
+						oDiv[j].style.top=oDiv[j].offsetTop+5+"px";
+							if(oDiv[j].style.top==400+"px"){
+								oDiv[j].style.top=0+"px"
+							}
+						}
+						for(var m=0;m<oDiv.length;m++){
+							document.onkeydown=function(evt){
+								var e=evt||window.event;
+								if(e.keyCode==n){
+								oDiv[m].style.top=0+"px";
+							}
+							n++;
+							}
+						}
+						
+					},100)
+				}
+			}
+		}
+		</script>
+	</head>
+	<body style="width:800px;">
+		<div>A</div>
+		<div>B</div>
+		<div>C</div>
+		<div>D</div>
+		<div>E</div>
+		<div>F</div>
+		<div>G</div>
+		<div>H</div>
+		<div>I</div>
+		<div>J</div>
+		<div>K</div>
+		<div>L</div>
+		<div>M</div>
+		<div>N</div>
+		<div>O</div>
+		<div>P</div>
+		<div>Q</div>
+		<div>R</div>
+		<div>S</div>
+		<div>T</div>
+		<div>U</div>
+		<div>V</div>
+		<div>W</div>
+		<div>X</div>
+		<div>Y</div>
+		<div>Z</div>
+	</body>
+</html>

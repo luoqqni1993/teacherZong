@@ -1,0 +1,1472 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+		<link rel="stylesheet" type="text/css" href="css/style.css"/>
+		<link rel="stylesheet" type="text/css" href="css/slider.css"/>
+		<script src="js/sport.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			function change(){
+				var oWidget=document.getElementById("widget");
+				var oA=oWidget.getElementsByTagName("a");
+				var oFimg=document.getElementById("fimg");
+				oA[0].onclick=function(){
+					startMove(oWidget,{"height":"32"})
+				}
+				oA[1].onclick=function(){
+					startMove(oWidget,{"height":"272"})
+				}
+				oA[4].onmouseover=oFimg.onmousemove=function(){
+					oFimg.style.display="block";
+				}
+				oA[4].onmouseout=oFimg.onmouseout=function(){
+					oFimg.style.display="none";
+				}
+			}
+			function panel(){
+				var oPanel=document.getElementById("panel");
+				var oA=oPanel.getElementsByTagName("a");
+				var oWidget=document.getElementById("widget");
+				var oWa=oWidget.getElementsByTagName("a");
+				document.onscroll=function(){
+					var scroll=document.documentElement.scrollTop||document.body.scrollTop;
+					document.title=scroll;
+					if(scroll>=700&&scroll<=9600){
+						oPanel.style.display="block";
+						oWidget.style.display="block";
+						oWa[5].onclick=function(){
+							document.body.scrollTop=0;
+						}
+						if(scroll>700&&scroll<=1331){
+							oA[0].style.color="#ff0000";
+						}else{
+							oA[0].style.color="#333333";
+						}
+						if(scroll>1331&&scroll<=1990){
+							oA[1].style.color="#ff0000";
+						}else{
+							oA[1].style.color="#333333";
+						}
+						if(scroll>1990&&scroll<=3300){
+							oA[2].style.color="#ff0000";
+						}else{
+							oA[2].style.color="#333333";
+						}
+						if(scroll>3300&&scroll<=4100){
+							oA[3].style.color="#ff0000";
+						}else{
+							oA[3].style.color="#333333";
+						}
+						if(scroll>4100&&scroll<=4700){
+							oA[4].style.color="#ff0000";
+						}else{
+							oA[4].style.color="#333333";
+						}
+						if(scroll>4700&&scroll<=5400){
+							oA[5].style.color="#ff0000";
+						}else{
+							oA[5].style.color="#333333";
+						}
+						if(scroll>5400&&scroll<=6100){
+							oA[6].style.color="#ff0000";
+						}else{
+							oA[6].style.color="#333333";
+						}
+						if(scroll>6100&&scroll<=6800){
+							oA[7].style.color="#ff0000";
+						}else{
+							oA[7].style.color="#333333";
+						}
+						if(scroll>6800&&scroll<=7500){
+							oA[8].style.color="#ff0000";
+						}else{
+							oA[8].style.color="#333333";
+						}
+						if(scroll>7500&&scroll<=8200){
+							oA[9].style.color="#ff0000";
+						}else{
+							oA[9].style.color="#333333";
+						}
+						if(scroll>8200&&scroll<=8900){
+							oA[10].style.color="#ff0000";
+						}else{
+							oA[10].style.color="#333333";
+						}
+						if(scroll>8900&&scroll<=9600){
+							oA[11].style.color="#ff0000";
+						}else{
+							oA[11].style.color="#333333";
+						}
+						oA[0].onclick=function(){
+							document.body.scrollTop=700;
+						}
+						oA[1].onclick=function(){
+							document.body.scrollTop=1331;
+						}
+						oA[2].onclick=function(){
+							document.body.scrollTop=1990;
+						}
+						oA[3].onclick=function(){
+							document.body.scrollTop=3300;
+						}
+						oA[4].onclick=function(){
+							document.body.scrollTop=4100;
+						}
+						var j=4100;
+						for(var i=5;i<=11;i++){
+							j+=700;
+							oA[i].onclick=function(){
+								document.body.scrollTop=j;
+							}
+						}
+					}else{
+						oPanel.style.display="none";
+						oWidget.style.display="none";
+					}
+					
+				}
+			}
+			function Slider(_obj,step,_t){
+				var oLbt=document.getElementById("lbt");
+				var _s=document.getElementById("slider");
+				var _c=document.getElementById("circle");
+				this.images=_obj;
+	//创建css属性方法
+				this.initCss=function(){
+					_c.style.width=_c.children.length*20+20+"px";
+					_c.children[0].style.background="red";
+					_s.style.width=oLbt.clientWidth*_s.children.length+"px";
+				}
+	//创建节点属性方法
+				this.createDom=function(){
+					var _img=null;
+					var _point=null;
+					for(var key in this.images){
+						_img=document.createElement("img");
+						_img.src=this.images[key];
+						_s.appendChild(_img);
+						_point=document.createElement("span");
+						_c.appendChild(_point);
+					}	
+					_img=document.createElement("img");
+					_img.src=this.images["img1"];
+					_s.appendChild(_img);
+				}
+	//创建控制颜色的函数
+				var _timer=0;
+				var _index=0;
+				function pointControl(){
+					for(var i=0;i<_c.children.length;i++){
+						_c.children[i].style.backgroundColor="white";
+					}
+					_c.children[_index].style.backgroundColor="red";
+				}
+	//创建向左移动的方法
+				this.leftRun=function(){
+					window.clearTimeout(_timer);
+					var _left=0;
+					var _step=0;
+					var m_l=oLbt.clientWidth*(_s.children.length-1);
+					_left=parseInt((_s.currentStyle||window.getComputedStyle(_s,null))["left"].replace(/px/g,""));
+					_left=(_left<=-m_l ? 0 : _left);
+					_step=Math.abs(_left%oLbt.clientWidth);
+					_left=Math.ceil(_left/oLbt.clientWidth)*oLbt.clientWidth;
+					(function exec(){
+						window.clearTimeout(_timer);
+						_step+=step;
+						_s.style.left=_left-_step+"px";
+						if(_step<oLbt.clientWidth){
+							setTimeout(exec,_t);
+						}else{
+							_left=parseInt((_s.currentStyle||window.getComputedStyle(_s,null))["left"].replace(/px/g,""));
+							_index=Math.abs(_left/oLbt.clientWidth);
+							_index=_index==_c.children.length ? 0 : _index;
+							pointControl();
+						}
+					})();
+		
+		
+				}
+	//创建向右移动的方法
+				this.rightRun=function(){
+					window.clearTimeout(_timer);
+					var _left=0;
+					var _step=0;
+					var m_l=oLbt.clientWidth*(_s.children.length-1);
+					_left=parseInt((_s.currentStyle||window.getComputedStyle(_s,null)["left"]).replace(/px/g,""));
+					_left=(_left>=0 ? -m_l : _left);//判断是否回到第一张
+					_step=oLbt.clientWidth-Math.abs(_left)%oLbt.clientWidth;
+					_step=_step==oLbt.clientWidth ? 0 : _step;
+					_left=Math.floor(_left/oLbt.clientWidth)*oLbt.clientWidth;
+					(function exec(){
+						window.clearTimeout(_timer);
+						_step+=step;
+						_s.style.left=_left+_step+"px";
+						if(_step<oLbt.clientWidth){
+							setTimeout(exec,_t);
+						}else{
+							_left=parseInt((_s.currentStyle||window.getComputedStyle(_s,null))["left"].replace(/px/g,""));
+							_index=Math.abs(_left/oLbt.clientWidth);
+							_index=_index==_c.children.length ? 0 : _index;
+							pointControl();
+						}
+					})();
+				}	
+	//创建自动移动的方法
+				this.autoRun=function(){
+					var _left=0;
+					var m_l=oLbt.clientWidth*(_s.children.length-1);
+					(function exec(){
+						window.clearTimeout(_timer);
+						_left=parseInt((_s.currentStyle||window.getComputedStyle(_s,null))["left"].replace(/px/g,""));
+						_left=(_left<=-m_l ? 0 : _left);
+						_s.style.left=_left-step+"px";
+						_left=parseInt((_s.currentStyle||window.getComputedStyle(_s,null))["left"].replace(/px/g,""));
+						if(_left%oLbt.clientWidth==0){
+							_index=Math.abs(_left)/oLbt.clientWidth;
+							_index=_index==_c.children.length ? 0 : _index;
+							pointControl();
+							_timer=window.setTimeout(exec,2000);
+						}else{
+							_timer=window.setTimeout(exec,_t)
+						}
+					})();
+				}
+	//创建点击移动的方法
+				this.circleClick=function(n){
+					var _left=0;
+					var m_l=oLbt.clientWidth*(_s.children.length-1);
+					(function exec(){
+						window.clearTimeout(_timer);
+						_left=parseInt((_s.currentStyle||window.getComputedStyle(_s,null))["left"].replace(/px/g,""));
+						_left=(_left<-m_l ? 0 : _left);
+						_s.style.left=_left-step+"px";
+						_left=parseInt((_s.currentStyle||window.getComputedStyle(_s,null))["left"].replace(/px/g,""));
+						if(_left<=-m_l){
+							_left=0;
+						}
+						if(_left==-oLbt.clientWidth*n){
+							_index=Math.abs(_left)/oLbt.clientWidth;
+							_index=_index==_c.children.length ? 0 : _index;
+							pointControl();
+							_timer=window.setTimeout(exec,2000);
+						}else{
+							_timer=window.setTimeout(exec,_t);
+						}
+					})();
+				}
+			}
+			window.onload=function(){
+				var oLbt=document.getElementById("lbt");
+				var oP=document.getElementsByClassName("p1")[0];
+				var oP1=document.getElementsByClassName("p2")[0];
+				var oP2=document.getElementsByClassName("p3")[0];
+				var oP3=document.getElementsByClassName("p4")[0];
+				var oSecondList=document.getElementsByClassName("secondList")[0];
+				var oSecond2List=document.getElementsByClassName("second2List")[0];
+				var oSecond3List=document.getElementsByClassName("second3List")[0];
+				var oSecond4List=document.getElementsByClassName("second4List")[0];
+				oP.onmouseover=oSecondList.onmouseover=function(){
+					oSecondList.style.display="block";
+				}
+				oP.onmouseout=oSecondList.onmouseout=function(){
+					oSecondList.style.display="none";
+				}
+				oP1.onmouseover=oSecond2List.onmouseover=function(){
+					oSecond2List.style.display="block";
+				}
+				oP1.onmouseout=oSecond2List.onmouseout=function(){
+					oSecond2List.style.display="none";
+				}
+				oP2.onmouseover=oSecond3List.onmouseover=function(){
+					oSecond3List.style.display="block";
+				}
+				oP2.onmouseout=oSecond3List.onmouseout=function(){
+					oSecond3List.style.display="none";
+				}
+				oP3.onmouseover=oSecond4List.onmouseover=function(){
+					oSecond4List.style.display="block";
+				}
+				oP3.onmouseout=oSecond4List.onmouseout=function(){
+					oSecond4List.style.display="none";
+				}
+				var _slider=new Slider({
+					"img1":"img/lbt1-1.png",
+					"img2":"img/lbt2-1.png",
+					"img3":"img/lbt3-1.png",
+					"img4":"img/lbt4-1.png",
+					"img5":"img/lbt5-1.png"
+				},1263,100);
+				_slider.createDom();
+				_slider.initCss();
+				var _timer=window.setTimeout(function(){_slider.autoRun();},2000);
+				document.getElementById("a_l").onclick=function(){
+					window.clearTimeout(_timer);
+					_slider.leftRun()
+					window.setTimeout(function(){_slider.autoRun()},2000);
+				}
+				document.getElementById("a_r").onclick=function(){
+					window.clearTimeout(_timer);
+					_slider.rightRun();
+					window.setTimeout(function(){_slider.autoRun()},2000);
+				}
+				var _points=document.getElementById("circle").getElementsByTagName("span");
+				for(var i=0;i<_points.length;i++){
+					(function(n){
+						_points[i].onclick=function(){
+							window.clearTimeout(_timer);
+							_slider.circleClick(n);
+							window.setTimeout(function(){_slider.autoRun()},2000);
+						}
+					})(i);
+				}
+				panel();
+				change();
+				var _number=document.getElementById("number");
+				var _cookie=JSON.parse(document.cookie.split("=")[1]);
+				_number.innerHTML=_cookie["list"]+"件商品";
+			}
+		</script>
+	</head>
+	<body>
+		<div id="com-area-topnav">
+			<p>奥康国际(<span>603001</span>)官方唯一商城!4009-603001</p>
+			<a class="login" href="Logins.html" target="_blank"><img src="img/enter.png"></a>
+			<a class="register" href="register.html" target="_blank">[<span>快速注册</span>]</a>
+			<ul class="right-nav">
+				<li class="a1">
+					<a href="userCenter.html" target="_blank">个人中心</a>
+					<ul>
+						<li>我的订单</li>
+						<li>我的收藏</li>
+						<li>我的优惠券</li>
+						<li>我的积分</li>
+					</ul>
+				</li>
+				<li class="a2"><a href="javascript:;">信息(0)</a></li>
+				<li class="a3"><a href="javascript:;">企事业团购</a></li>
+				<li class="a4">
+					<a href="javascript:;">网站导航</a>
+					<ul>
+						<li>舒尚学院</li>
+						<li>奥康国际603001</li>
+						<li>官方微博</li>
+						<li>网站导航</li>
+					</ul>
+				</li>
+				<li class="a5"><a href="javascript:;">手机版</a></li>
+				<li class="a6"><a href="javascript:;">新手帮助</a></li>
+				<li class="a7"><a href="javascript:;">会员秀</a></li>
+			</ul>
+		</div>
+		<div id="com-area-header">
+			<ul class="phoneak">
+				<li>手</li>
+				<li>机</li>
+				<li>奥</li>
+				<li>康</li>
+			</ul>
+			<img src="img/erweima-1.png">
+			<div class="wrap">
+				<input type="text" class="text" value="请输入搜索关键词">
+				<a href="javascript:;" class="search">搜索</a>
+				<ul class="category">
+					<li><a href="javascript:;">商务男鞋</a></li>
+					<li><a href="javascript:;">男凉鞋</a></li>
+					<li><a href="javascript:;">奥康</a></li>
+					<li><a href="javascript:;">驾车鞋</a></li>
+					<li class="a1"><a href="javascript:;">大牌清仓！</a></li>
+					<li class="a2"><a href="javascript:;">秋季新品</a></li>
+					<li><a href="javascript:;">小白鞋</a></li>
+				</ul>
+			</div>
+			<a href="cart.html" target="_blank" class="shop" id="number">购物车(0)</a>
+		</div>
+		<div id="headNav">
+			<ul class="wrap">
+				<li class="b1"><a href="javascript:;">全部商品分类</a></li>
+				<li class="b2"><a href="javascript:;">首页</a></li>
+				<li class="b3"><a href="javascript:;">天天团</a></li>
+				<li class="b4"><a href="javascript:;">新品发布</a></li>
+				<li class="b5"><a href="javascript:;">奥康特惠</a></li>
+				<li class="b6"><a href="javascript:;">积分购</a></li>
+				<li class="b7"><a href="javascript:;">防伪查询</a></li>
+				<li class="b8"><a href="javascript:;">哇！O2O</a></li>
+			</ul>
+		</div>
+		<div id="lbt">
+			<div id="slider"></div>
+			<div id="arrow">
+				<span id="a_l">&lt;</span>
+				<span id="a_r">&gt;</span>
+			</div>
+			<div id="circle"></div>
+			<div class="product">
+				<div class="p1">
+					<h6><a href="javascript:;">男鞋馆</a></h6>
+					<ul>
+						<li><a href="javascript:;">男凉鞋</a></li>
+						<li><a href="javascript:;">商务正装</a></li>
+						<li><a href="javascript:;">商务休闲</a></li>
+						<li><a href="javascript:;">商务精品</a></li>
+						<li><a href="javascript:;">日常休闲</a></li>
+						<li><a href="javascript:;">运</a></li>
+					</ul>
+				</div>
+				<div class="p2">
+					<h6><a href="javascript:;">女鞋馆</a></h6>
+					<ul>
+						<li><a href="javascript:;">女凉鞋</a></li>
+						<li><a href="javascript:;">新品女鞋</a></li>
+						<li><a href="javascript:;">平底鞋</a></li>
+						<li><a href="javascript:;">中跟鞋</a></li>
+						<li><a href="javascript:;">高跟鞋</a></li>
+						<li><a href="javascript:;">坡跟鞋</a></li>
+						<li><a href="javascript:;">女</a></li>
+					</ul>
+				</div>
+				<div class="p3">
+					<h6><a href="javascript:;">箱包馆</a></h6>
+					<ul>
+						<li><a href="javascript:;">男士皮包</a></li>
+						<li><a href="javascript:;">女士皮包</a></li>
+						<li><a href="javascript:;">手包/钱包</a></li>
+						<li><a href="javascript:;">皮带</a></li>
+						<li><a href="javascript:;">拉杆箱</a></li>
+					</ul>
+				</div>
+				<div class="p4">
+					<h6><a href="javascript:;">童鞋馆</a></h6>
+					<ul>
+						<li><a href="javascript:;">童靴</a></li>
+						<li><a href="javascript:;">童单鞋</a></li>
+						<li><a href="javascript:;">小公主鞋</a></li>
+						<li><a href="javascript:;">蜗牛鞋</a></li>
+						<li><a href="javascript:;">童凉鞋</a></li>
+					</ul>
+				</div>
+				<div class="p5">
+					<h6><a href="javascript:;">功能馆</h6>
+					<ul>
+						<li><a href="javascript:;">增高鞋</a></li>
+						<li><a href="javascript:;">呼吸鞋</a></li>
+						<li><a href="javascript:;">大码鞋</a></li>
+						<li><a href="javascript:;">小码鞋</a></li>
+						<li><a href="javascript:;">固特异鞋</a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		<div class="secondList">
+				<ul class="secondWrap">
+					<li class="s1">
+						<h6><a href="javascript:;">频道分类</a></h6>
+						<ul>
+							<li><a href="javascript:;">男凉鞋</a></li>
+							<li><a href="javascript:;">商务正装</a></li>
+							<li><a href="javascript:;">商务休闲</a></li>
+							<li><a href="javascript:;">商务精品</a></li>
+							<li><a href="javascript:;">日常休闲</a></li>
+							<li><a href="javascript:;">运动休闲</a></li>
+							<li><a href="javascript:;">户外工装</a></li>
+							<li><a href="javascript:;">男棉鞋</a></li>
+						</ul>
+					</li>
+					<li class="s2">
+						<h6><a href="javascript:;">热门推荐</a></h6>
+						<ul>
+							<li><a href="javascript:;">新品上线</a></li>
+							<li><a href="javascript:;">豆豆鞋</a></li>
+							<li><a href="javascript:;">镂空鞋</a></li>
+							<li><a href="javascript:;">透气男鞋</a></li>
+							<li><a href="javascript:;">英伦风</a></li>
+						</ul>
+					</li>
+					<li class="s3">
+						<h6><a href="javascript:;">应季男鞋</a></h6>
+						<ul>
+							<li><a href="javascript:;">夏季凉鞋</a></li>
+							<li><a href="javascript:;">春秋单鞋</a></li>
+							<li><a href="javascript:;">冬季棉鞋</a></li>
+						</ul>
+					</li>
+					<li class="s4">
+						<h6><a href="javascript:;">特色男鞋</a></h6>
+						<ul>
+							<li><a href="javascript:;">爸爸鞋</a></li>
+							<li><a href="javascript:;">户外工装</a></li>
+							<li><a href="javascript:;">驾车鞋</a></li>
+						</ul>
+					</li>
+					<li class="s5">
+						<h6><a href="javascript:;">价格区间</a></h6>
+						<ul>
+							<li><a href="javascript:;">100元以下</a></li>
+							<li><a href="javascript:;">100-199元</a></li>
+							<li><a href="javascript:;">200-299元</a></li>
+							<li><a href="javascript:;">300-399元</a></li>
+							<li><a href="javascript:;">400-599元</a></li>
+							<li><a href="javascript:;">600-799元</a></li>
+							<li><a href="javascript:;">800-999元</a></li>
+							<li><a href="javascript:;">1000元以上</a></li>
+						</ul>
+					</li>
+				</ul>
+				<div class="secondList2">
+					<h6><a href="javascript:;">促销活动</a></h6>
+					<img src="img/active-1.png"/>
+					<div>
+						<ul>
+							<li><img src="img/logo1-1.png"></li>
+							<li><img src="img/logo2-1.png"></li>
+							<li><img src="img/logo3-1.png"></li>
+							<li><img src="img/logo4-1.png"></li>
+							<li><img src="img/logo5-1.png"></li>
+							<li><img src="img/logo6-1.png"></li>
+							<li><img src="img/logo7-1.png"></li>
+							<li><img src="img/logo8-1.png"></li>
+							<li><img src="img/logo9-1.png"></li>
+							<li><img src="img/logo10-1.png"></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+			<div class="second2List">
+				<ul class="secondWrap">
+					<li class="s1">
+						<h6><a href="javascript:;">频道分类</a></h6>
+						<ul>
+							<li><a href="javascript:;">女凉鞋</a></li>
+							<li><a href="javascript:;">新品女鞋</a></li>
+							<li><a href="javascript:;">平底鞋</a></li>
+							<li><a href="javascript:;">中跟鞋</a></li>
+							<li><a href="javascript:;">高跟鞋</a></li>
+							<li><a href="javascript:;">坡跟鞋</a></li>
+							<li><a href="javascript:;">女靴</a></li>
+						</ul>
+					</li>
+					<li class="s2">
+						<h6><a href="javascript:;">流行趋势</a></h6>
+						<ul>
+							<li><a href="javascript:;">高跟单鞋</a></li>
+							<li><a href="javascript:;">鱼嘴鞋</a></li>
+							<li><a href="javascript:;">高跟凉鞋</a></li>
+							<li><a href="javascript:;">护士鞋</a></li>
+							<li><a href="javascript:;">婚鞋</a></li>
+						</ul>
+					</li>
+					<li class="s3">
+						<h6><a href="javascript:;">应季鞋款</a></h6>
+						<ul>
+							<li><a href="javascript:;">夏季单鞋</a></li>
+							<li><a href="javascript:;">冬季女靴</a></li>
+							<li><a href="javascript:;">夏季凉鞋</a></li>
+						</ul>
+					</li>
+					<li class="s4">
+						<h6><a href="javascript:;">单鞋</a></h6>
+						<ul>
+							<li><a href="javascript:;">高跟单鞋</a></li>
+							<li><a href="javascript:;">中跟单鞋</a></li>
+							<li><a href="javascript:;">超高跟</a></li>
+							<li><a href="javascript:;">坡跟单鞋</a></li>
+							<li><a href="javascript:;">平底单鞋</a></li>
+						</ul>
+					</li>
+					<li class="s5">
+						<h6><a href="javascript:;">特色鞋款</a></h6>
+						<ul>
+							<li><a href="javascript:;">妈妈鞋</a></li>
+							<li><a href="javascript:;">驾车鞋</a></li>
+							<li><a href="javascript:;">结婚鞋</a></li>
+						</ul>
+					</li>
+					<li class="s6">
+						<h6><a href="javascript:;">风格</a></h6>
+						<ul>
+							<li><a href="javascript:;">甜美</a></li>
+							<li><a href="javascript:;">休闲</a></li>
+							<li><a href="javascript:;">通勤</a></li>
+							<li><a href="javascript:;">英伦</a></li>
+							<li><a href="javascript:;">韩版</a></li>
+							<li><a href="javascript:;">欧美</a></li>
+							<li><a href="javascript:;">性感</a></li>
+							<li><a href="javascript:;">复古</a></li>
+							<li><a href="javascript:;">简约</a></li>
+						</ul>
+					</li>
+					<li class="s7">
+						<h6><a href="javascript:;">优雅气质</a></h6>
+						<ul>
+							<li><a href="javascript:;">百搭</a></li>
+							<li><a href="javascript:;">防水台</a></li>
+							<li><a href="javascript:;">职场</a></li>
+							<li><a href="javascript:;">秀MAN女友款</a></li>
+							<li><a href="javascript:;">性感漆皮</a></li>
+							<li><a href="javascript:;">水钻</a></li>
+						</ul>
+					</li>
+					<li class="s8">
+						<h6><a href="javascript:;">价格区间</a></h6>
+						<ul>
+							<li><a href="javascript:;">100元以下</a></li>
+							<li><a href="javascript:;">100-199元</a></li>
+							<li><a href="javascript:;">200-299元</a></li>
+							<li><a href="javascript:;">300-399元</a></li>
+							<li><a href="javascript:;">400-599元</a></li>
+							<li><a href="javascript:;">600-799元</a></li>
+							<li><a href="javascript:;">800-999元</a></li>
+							<li><a href="javascript:;">1000元以上</a></li>
+						</ul>
+					</li>
+				</ul>
+				<div class="second2List2">
+					<h6><a href="javascript:;">促销活动</a></h6>
+					<img src="img/active-1.png"/>
+					<div>
+						<ul>
+							<li><img src="img/logo1-1.png"></li>
+							<li><img src="img/logo2-1.png"></li>
+							<li><img src="img/logo3-1.png"></li>
+							<li><img src="img/logo4-1.png"></li>
+							<li><img src="img/logo5-1.png"></li>
+							<li><img src="img/logo6-1.png"></li>
+							<li><img src="img/logo7-1.png"></li>
+							<li><img src="img/logo8-1.png"></li>
+							<li><img src="img/logo9-1.png"></li>
+							<li><img src="img/logo10-1.png"></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+			<div class="second3List">
+				<ul class="secondWrap">
+					<li class="s1">
+						<h6><a href="javascript:;">频道分类</a></h6>
+						<ul>
+							<li><a href="javascript:;">男士皮包</a></li>
+							<li><a href="javascript:;">女式皮包</a></li>
+							<li><a href="javascript:;">手包/钱包</a></li>
+							<li><a href="javascript:;">皮带</a></li>
+							<li><a href="javascript:;">拉杆箱</a></li>
+						</ul>
+					</li>
+					<li class="s2">
+						<h6><a href="javascript:;">男士箱包</a></h6>
+						<ul>
+							<li><a href="javascript:;">单肩包</a></li>
+							<li><a href="javascript:;">手提包</a></li>
+							<li><a href="javascript:;">斜挎包</a></li>
+							<li><a href="javascript:;">手拿包</a></li>
+							<li><a href="javascript:;">商务包</a></li>
+						</ul>
+					</li>
+					<li class="s3">
+						<h6><a href="javascript:;">女式箱包</a></h6>
+						<ul>
+							<li><a href="javascript:;">手提包</a></li>
+							<li><a href="javascript:;">单肩包</a></li>
+							<li><a href="javascript:;">菱格包</a></li>
+							<li><a href="javascript:;">斜挎包</a></li>
+						</ul>
+					</li>
+					<li class="s4">
+						<h6><a href="javascript:;">皮带</a></h6>
+						<ul>
+							<li><a href="javascript:;">男自动扣</a></li>
+							<li><a href="javascript:;">男针扣</a></li>
+							<li><a href="javascript:;">男平滑扣</a></li>
+							<li><a href="javascript:;">女式皮带</a></li>
+						</ul>
+					</li>
+					<li class="s5">
+						<h6><a href="javascript:;">钱包卡套</a></h6>
+						<ul>
+							<li><a href="javascript:;">长款钱夹</a></li>
+							<li><a href="javascript:;">短款钱夹</a></li>
+							<li><a href="javascript:;">横款钱夹</a></li>
+							<li><a href="javascript:;">竖款钱夹</a></li>
+							<li><a href="javascript:;">卡包卡套</a></li>
+							<li><a href="javascript:;">女式钱夹</a></li>
+						</ul>
+					</li>
+					<li class="s6">
+						<h6><a href="javascript:;">旅行箱包</a></h6>
+					</li>
+					<li class="s7">
+						<h6><a href="javascript:;">价格区间</a></h6>
+						<ul>
+							<li><a href="javascript:;">100元以下</a></li>
+							<li><a href="javascript:;">100-199元</a></li>
+							<li><a href="javascript:;">200-299元</a></li>
+							<li><a href="javascript:;">300-399元</a></li>
+							<li><a href="javascript:;">400-599元</a></li>
+							<li><a href="javascript:;">600-799元</a></li>
+							<li><a href="javascript:;">800-999元</a></li>
+							<li><a href="javascript:;">1000元以上</a></li>
+						</ul>
+					</li>
+				</ul>
+				<div class="second3List2">
+					<h6><a href="javascript:;">促销活动</a></h6>
+					<img src="img/active-1.png"/>
+					<div>
+						<ul>
+							<li><img src="img/logo1-1.png"></li>
+							<li><img src="img/logo2-1.png"></li>
+							<li><img src="img/logo3-1.png"></li>
+							<li><img src="img/logo4-1.png"></li>
+							<li><img src="img/logo5-1.png"></li>
+							<li><img src="img/logo6-1.png"></li>
+							<li><img src="img/logo7-1.png"></li>
+							<li><img src="img/logo8-1.png"></li>
+							<li><img src="img/logo9-1.png"></li>
+							<li><img src="img/logo10-1.png"></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+			<div class="second4List">
+				<ul class="secondWrap">
+					<li class="s1">
+						<h6><a href="javascript:;">频道分类</a></h6>
+						<ul>
+							<li><a href="javascript:;">童靴</a></li>
+							<li><a href="javascript:;">童单鞋</a></li>
+							<li><a href="javascript:;">小公主鞋</a></li>
+							<li><a href="javascript:;">蜗牛鞋</a></li>
+							<li><a href="javascript:;">童凉鞋</a></li>
+						</ul>
+					</li>
+					<li class="s2">
+						<h6><a href="javascript:;">按性别</a></h6>
+						<ul>
+							<li><a href="javascript:;">男童鞋</a></li>
+							<li><a href="javascript:;">女童鞋</a></li>
+							<li><a href="javascript:;">男女均可</a></li>
+						</ul>
+					</li>
+					<li class="s3">
+						<h6><a href="javascript:;">按季节</a></h6>
+						<ul>
+							<li><a href="javascript:;">春秋款</a></li>
+							<li><a href="javascript:;">夏款</a></li>
+							<li><a href="javascript:;">夏款</a></li>
+						</ul>
+					</li>
+					<li class="s4">
+						<h6><a href="javascript:;">按风格</a></h6>
+						<ul>
+							<li><a href="javascript:;">蜗牛鞋</a></li>
+							<li><a href="javascript:;">学生鞋</a></li>
+							<li><a href="javascript:;">公主鞋</a></li>
+							<li><a href="javascript:;">凉鞋</a></li>
+							<li><a href="javascript:;">单鞋</a></li>
+							<li><a href="javascript:;">童靴</a></li>
+						</ul>
+					</li>
+					<li class="s5">
+						<h6><a href="javascript:;">价格区间</a></h6>
+						<ul>
+							<li><a href="javascript:;">100元以下</a></li>
+							<li><a href="javascript:;">100-199元</a></li>
+							<li><a href="javascript:;">200-299元</a></li>
+							<li><a href="javascript:;">300-399元</a></li>
+							<li><a href="javascript:;">400-599元</a></li>
+							<li><a href="javascript:;">600-799元</a></li>
+							<li><a href="javascript:;">800-999元</a></li>
+							<li><a href="javascript:;">1000元以上</a></li>
+						</ul>
+					</li>
+				</ul>
+				<div class="second4List2">
+					<h6><a href="javascript:;">促销活动</a></h6>
+					<img src="img/active-1.png"/>
+					<div>
+						<ul>
+							<li><img src="img/logo1-1.png"></li>
+							<li><img src="img/logo2-1.png"></li>
+							<li><img src="img/logo3-1.png"></li>
+							<li><img src="img/logo4-1.png"></li>
+							<li><img src="img/logo5-1.png"></li>
+							<li><img src="img/logo6-1.png"></li>
+							<li><img src="img/logo7-1.png"></li>
+							<li><img src="img/logo8-1.png"></li>
+							<li><img src="img/logo9-1.png"></li>
+							<li><img src="img/logo10-1.png"></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		<div id="item">
+			<p><span class="a1">奥康商城</span> <span class="a2">官方推荐</span></p>
+			<ul class="wrapItem">
+				<li class="b1"></li>
+				<li class="b2">官方正品</li>
+				<li class="b3">七天无理由</li>
+				<li class="b4">全场包邮</li>
+				<li class="b5">官方自营</li>
+				<li class="b6"></li>
+			</ul>
+		</div>
+		<div id="type">
+			<ul>
+				<li><img src="img/text1-1.png"/></li>
+				<li><img src="img/text2-1.png"/></li>
+				<li><img src="img/text3-1.png"/></li>
+				<li><img src="img/text4-1.png"/></li>
+				<li><img src="img/text5-1.png"/></li>
+				<li><img src="img/text6-1.png"/></li>
+			</ul>
+		</div>
+		<div id="secondItem">
+			<p>
+				<span class="s1">天天团</span>
+				<span class="s2">EVERDAY</span>
+			</p>
+			<ul>
+				<li class="l1"></li>
+				<li class="l2">每天准时更新</li>
+				<li class="l3"></li>
+			</ul>
+		</div>
+		<div id="grab">
+			<div class="d1">
+				<img src="img/grab1-1.png"/>
+				<p>奥康女鞋2016春季新款真皮厚底板鞋女 时尚百搭系带板鞋小白鞋</p>
+				<span>¥ 269.00</span>
+				<i>¥ 569.00</i>
+				<a href="javascript:;">马上抢</a>
+			</div>
+			<div class="d2">
+				<img src="img/grab2-1.png"/>
+				<p>奥康女鞋  2016春季新款低帮时尚拼接女式防水台系带休闲运动单鞋</p>
+				<span>¥ 269.00</span>
+				<i>¥ 569.00</i>
+				<a href="javascript:;">马上抢</a>
+			</div>
+			<div class="d3">
+				<img src="img/grab3-1.png"/>
+				<p>奥康男鞋，2016春季新款套脚真皮休闲皮鞋英伦软底青年男士鞋子</p>
+				<span>¥ 269.00</span>
+				<i>¥ 569.00</i>
+				<a href="javascript:;">马上抢</a>
+			</div>
+		</div>
+		<div id="thirdItem">
+			<p><img src="img/aokang-1.png"/></p>
+			<ul>
+				<li class="l1"></li>
+				<li class="l2">奥康 梦想是走出来的！</li>
+				<li class="l3"></li>
+			</ul>
+		</div>
+		<div id="aokangsell">
+			<div class="ls1">
+				<h6>品牌分类</h6>
+				<ul>
+					<li>商务正装</li>
+					<li>商务精品</li>
+					<li>休闲系统</li>
+					<li>布洛克</li>
+					<li>户外工装</li>
+					<li>男棉鞋</li>
+					<li>爱与面包</li>
+					<li>奥康功能鞋</li>
+				</ul>
+			</div>
+			<div class="ls2">
+				<ul>
+					<li><img src="img/ao1-1.png"/></li>
+					<li><img src="img/ao7-1.png"/></li>
+				</ul>
+				<ul>
+					<li><img src="img/ao2-1.png"/></li>
+					<li><img src="img/ao4-1.png"/></li>
+				</ul>
+				<ul>
+					<li><img src="img/ao3-1.png"/></li>
+					<li><img src="img/ao5-1.png"/></li>
+					<li><img src="img/ao6-1.png"/></li>
+				</ul>
+			</div>
+		</div>
+		<div id="aokangsell2">
+			<ul>
+				<li>
+					<img src="img/xie1-1.png"/>
+					<span>¥ 299.00</span>
+					<p>奥康男鞋 新款套脚轻便护脚鞋韩版休</p>
+					<a href="javascript:;">立即购买</a>
+				</li>
+				<li>
+					<img src="img/xie2-1.png"/>
+					<span>¥ 299.00</span>
+					<p>奥康男鞋 新款青年男士休闲鞋真皮潮</p>
+					<a href="javascript:;">立即购买</a>
+				</li>
+				<li>
+					<img src="img/xie3-1.png"/>
+					<span>¥ 299.00</span>
+					<p>奥康男鞋 新款韩版真皮时尚潮鞋软底</p>
+					<a href="javascript:;">立即购买</a>
+				</li>
+				<li>
+					<img src="img/xie4-1.png"/>
+					<span>¥ 299.00</span>
+					<p>奥康男鞋 新款雕花真皮韩版休闲鞋青</p>
+					<a href="javascript:;">立即购买</a>
+				</li>
+				<li>
+					<img src="img/xie5-1.png"/>
+					<span>¥ 299.00</span>
+					<p>奥康男鞋 新款尖头英伦真皮软底除臭</p>
+					<a href="javascript:;">立即购买</a>
+				</li>
+				<li>
+					<img src="img/xie6-1.png"/>
+					<span>¥ 299.00</span>
+					<p>奥康男鞋 新款系带商务真皮男商务休</p>
+					<a href="javascript:;">立即购买</a>
+				</li>
+				<li>
+					<img src="img/xie7-1.png"/>
+					<span>¥ 299.00</span>
+					<p>奥康男鞋 新款韩版真皮软底休闲鞋青</p>
+					<a href="javascript:;">立即购买</a>
+				</li>
+				<li>
+					<img src="img/xie8-1.png"/>
+					<span>¥ 299.00</span>
+					<p>奥康男鞋 春夏季新款系带真皮防滑耐</p>
+					<a href="javascript:;">立即购买</a>
+				</li>
+				<li>
+					<img src="img/xie9-1.png"/>
+					<span>¥ 299.00</span>
+					<p>奥康男鞋 新款商务男英伦尖头轻质青</p>
+					<a href="javascript:;">立即购买</a>
+				</li>
+				<li>
+					<img src="img/xie10-1.png"/>
+					<span>¥ 299.00</span>
+					<p>奥康男鞋 新款尖头简约真皮透气青年</p>
+					<a href="javascript:;">立即购买</a>
+				</li>
+			</ul>
+		</div>
+		<div id="fourthItem">
+			<p><img src="img/aokangnv-1.png"/></p>
+			<ul>
+				<li class="l1"></li>
+				<li class="l2">奥康女鞋 穿出女性美</li>
+				<li class="l3"></li>
+			</ul>
+		</div>
+		<div id="aokangnvsell">
+			<div class="ls1">
+				<h6>品牌分类</h6>
+				<ul>
+					<li>踝靴</li>
+					<li>豆豆鞋</li>
+					<li>平底鞋</li>
+					<li>中跟鞋</li>
+					<li>高跟鞋</li>
+					<li>精品女鞋</li>
+				</ul>
+			</div>
+			<div class="ls2">
+				<ul>
+					<li><img src="img/akn1-1.png"/></li>
+					<li><img src="img/akn7-1.png"/></li>
+				</ul>
+				<ul>
+					<li><img src="img/akn2-1.png"/></li>
+					<li><img src="img/akn4-1.png"/></li>
+				</ul>
+				<ul>
+					<li><img src="img/akn3-1.png"/></li>
+					<li><img src="img/akn5-1.png"/></li>
+					<li><img src="img/akn6-1.png"/></li>
+				</ul>
+			</div>
+		</div>
+		<div id="fifthItem">
+			<p><img src="img/kanglong-1.png"/></p>
+			<ul>
+				<li class="l1"></li>
+				<li class="l2">穿康龙 去旅行</li>
+				<li class="l3"></li>
+			</ul>
+		</div>
+		<div id="kanglong">
+			<div class="ls1">
+				<h6>品牌分类</h6>
+				<ul>
+					<li>踝靴</li>
+					<li>豆豆鞋</li>
+					<li>平底鞋</li>
+					<li>中跟鞋</li>
+					<li>高跟鞋</li>
+					<li>精品女鞋</li>
+				</ul>
+			</div>
+			<div class="ls2">
+				<ul>
+					<li><img src="img/kl1-1.png"/></li>
+					<li><img src="img/kl7-1.png"/></li>
+				</ul>
+				<ul>
+					<li><img src="img/kl2-1.png"/></li>
+					<li><img src="img/kl4-1.png"/></li>
+				</ul>
+				<ul>
+					<li><img src="img/kl3-1.png"/></li>
+					<li><img src="img/kl5-1.png"/></li>
+					<li><img src="img/kl6-1.png"/></li>
+				</ul>
+			</div>
+		</div>
+		<div id="sixthItem">
+			<p><img src="img/mr-1.png"/></p>
+			<ul>
+				<li class="l1"></li>
+				<li class="l2">独立自信 注重“自我”</li>
+				<li class="l3"></li>
+			</ul>
+		</div>
+		<div id="mr">
+			<div class="ls1">
+				<h6>品牌分类</h6>
+				<ul>
+					<li>秋冬靴</li>
+					<li>时尚单鞋</li>
+					<li>蝴蝶结</li>
+					<li>韩版女鞋</li>
+					<li>舞会女鞋</li>
+					<li>踮起脚尖爱</li>
+				</ul>
+			</div>
+			<div class="ls2">
+				<ul>
+					<li><img src="img/mr1-1.png"/></li>
+					<li><img src="img/mr7-1.png"/></li>
+				</ul>
+				<ul>
+					<li><img src="img/mr2-1.png"/></li>
+					<li><img src="img/mr4-1.png"/></li>
+				</ul>
+				<ul>
+					<li><img src="img/mr3-1.png"/></li>
+					<li><img src="img/mr5-1.png"/></li>
+					<li><img src="img/mr6-1.png"/></li>
+				</ul>
+			</div>
+		</div>
+		<div id="seventhItem">
+			<p><img src="img/hb-1.png"/></p>
+			<ul>
+				<li class="l1"></li>
+				<li class="l2">"潮"我看齐</li>
+				<li class="l3"></li>
+			</ul>
+		</div>
+		<div id="chao">
+			<div class="ls1">
+				<h6>品牌分类</h6>
+				<ul>
+					<li>潮鞋</li>
+					<li>商务潮</li>
+					<li>红火鸟板鞋</li>
+					<li>马丁男靴</li>
+				</ul>
+			</div>
+			<div class="ls2">
+				<ul>
+					<li><img src="img/chao1-1.png"/></li>
+					<li><img src="img/chao7-1.png"/></li>
+				</ul>
+				<ul>
+					<li><img src="img/chao2-1.png"/></li>
+					<li><img src="img/chao4-1.png"/></li>
+				</ul>
+				<ul>
+					<li><img src="img/chao3-1.png"/></li>
+					<li><img src="img/chao5-1.png"/></li>
+					<li><img src="img/chao6-1.png"/></li>
+				</ul>
+			</div>
+		</div>
+		<div id="eighthItem">
+			<p><img src="img/pw-1.png"/></p>
+			<ul>
+				<li class="l1"></li>
+				<li class="l2">男人，就要有派头</li>
+				<li class="l3"></li>
+			</ul>
+		</div>
+		<div id="pw">
+			<div class="ls1">
+				<h6>品牌分类</h6>
+				<ul>
+					<li>正品男鞋</li>
+					<li>休闲男鞋</li>
+					<li>保暖棉鞋</li>
+					<li>懒人驾车</li>
+					<li>都市休闲</li>
+				</ul>
+			</div>
+			<div class="ls2">
+				<ul>
+					<li><img src="img/pw1-1.png"/></li>
+					<li><img src="img/pw7-1.png"/></li>
+				</ul>
+				<ul>
+					<li><img src="img/pw2-1.png"/></li>
+					<li><img src="img/playboy4-1.png"/></li>
+				</ul>
+				<ul>
+					<li><img src="img/pw3-1.png"/></li>
+					<li><img src="img/pw5-1.png"/></li>
+					<li><img src="img/pw6-1.png"/></li>
+				</ul>
+			</div>
+		</div>
+		<div id="ninthItem">
+			<p><img src="img/playboy-1.png"/></p>
+			<ul>
+				<li class="l1"></li>
+				<li class="l2">都市中的男人都要有“型”</li>
+				<li class="l3"></li>
+			</ul>
+		</div>
+		<div id="playboy">
+			<div class="ls1">
+				<h6>品牌分类</h6>
+				<ul>
+					<li>正品男鞋</li>
+					<li>休闲男鞋</li>
+					<li>保暖棉鞋</li>
+					<li>懒人驾车</li>
+					<li>都市休闲</li>
+				</ul>
+			</div>
+			<div class="ls2">
+				<ul>
+					<li><img src="img/playboy1-1.png"/></li>
+					<li><img src="img/playboy7-1.png"/></li>
+				</ul>
+				<ul>
+					<li><img src="img/playboy2-1.png"/></li>
+					<li><img src="img/playboy4-1.png"/></li>
+				</ul>
+				<ul>
+					<li><img src="img/playboy3-1.png"/></li>
+					<li><img src="img/playboy5-1.png"/></li>
+					<li><img src="img/playboy6-1.png"/></li>
+				</ul>
+			</div>
+		</div>
+		<div id="tenthItem">
+			<p><img src="img/lady-1.png"/></p>
+			<ul>
+				<li class="l1"></li>
+				<li class="l2">舒服、居家小女人</li>
+				<li class="l3"></li>
+			</ul>
+		</div>
+		<div id="lady">
+			<div class="ls1">
+				<h6>品牌分类</h6>
+				<ul>
+					<li>平底单鞋</li>
+					<li>深口单鞋</li>
+					<li>豆豆鞋</li>
+					<li>粗跟</li>
+					<li>RIIID女靴</li>
+				</ul>
+			</div>
+			<div class="ls2">
+				<ul>
+					<li><img src="img/lady1-1.png"/></li>
+					<li><img src="img/lady7-1.png"/></li>
+				</ul>
+				<ul>
+					<li><img src="img/lady2-1.png"/></li>
+					<li><img src="img/lady4-1.png"/></li>
+				</ul>
+				<ul>
+					<li><img src="img/lady3-1.png"/></li>
+					<li><img src="img/lady5-1.png"/></li>
+					<li><img src="img/lady6-1.png"/></li>
+				</ul>
+			</div>
+		</div>
+		<div id="eleventhItem">
+			<p><img src="img/goll-1.png"/></p>
+			<ul>
+				<li class="l1"></li>
+				<li class="l2">睿智舒适主义</li>
+				<li class="l3"></li>
+			</ul>
+		</div>
+		<div id="goll">
+			<div class="ls1">
+				<h6>品牌分类</h6>
+				<ul>
+					<li>英伦复古</li>
+					<li>箭头商务</li>
+					<li>英伦马丁</li>
+					<li>雕花布洛克</li>
+				</ul>
+			</div>
+			<div class="ls2">
+				<ul>
+					<li><img src="img/goll1-1.png"/></li>
+					<li><img src="img/goll7-1.png"/></li>
+				</ul>
+				<ul>
+					<li><img src="img/goll2-1.png"/></li>
+					<li><img src="img/goll4-1.png"/></li>
+				</ul>
+				<ul>
+					<li><img src="img/goll3-1.png"/></li>
+					<li><img src="img/goll5-1.png"/></li>
+					<li><img src="img/goll6-1.png"/></li>
+				</ul>
+			</div>
+		</div>
+		<div id="twelfthItem">
+			<p><img src="img/childhood-1.png"/></p>
+			<ul>
+				<li class="l1"></li>
+				<li class="l2">守护你的童年</li>
+				<li class="l3"></li>
+			</ul>
+		</div>
+		<div id="childhood">
+			<div class="ls1">
+				<h6>品牌分类</h6>
+				<ul>
+					<li>男童鞋</li>
+					<li>女童鞋</li>
+					<li>公主鞋</li>
+					<li>单鞋</li>
+					<li>蜗牛鞋</li>
+				</ul>
+			</div>
+			<div class="ls2">
+				<ul>
+					<li><img src="img/childhood1-1.png"/></li>
+					<li><img src="img/goll7-1.png"/></li>
+				</ul>
+				<ul>
+					<li><img src="img/childhood2-1.png"/></li>
+					<li><img src="img/childhood4-1.png"/></li>
+				</ul>
+				<ul>
+					<li><img src="img/childhood3-1.png"/></li>
+					<li><img src="img/childhood5-1.png"/></li>
+					<li><img src="img/childhood6-1.png"/></li>
+				</ul>
+			</div>
+		</div>
+		<div id="end">
+			<p>
+				<span class="s1">精彩活动</span>
+				<span class="s2">ACTIVITY</span>
+				<span class="s3">奥康-梦想是走出来的</span>
+				<span class="s4">NEWS</span>
+			</p>
+			<div class="a1"><img src="img/end1-1.png"/></div>
+			<div class="a2">
+				<div class="b1"><img src="img/end2-1.png"/></div>
+				<div class="b2">
+					<div class="c1"><img src="img/end3-1.png"/></div>
+					<div class="c2"><img src="img/end4-1.png"/></div>
+				</div>
+			</div>
+			<div class="a3">
+				<img src="img/end5-1.png"/>
+				<span class="s1">奥康国际冠名赞助首届温州马拉松</span>
+				<span class="s2">奥康国际冠名赞助首届温州马拉松......[查看详情]</span>
+			</div>
+			<ul class="wrap">
+				<li>
+					<p>奥康新推时尚运动鞋款，呼吁全行业注重环保</p>
+					<span>2016-08-13</span>
+				</li>
+				<li>
+					<p>奥康携手无名奥运冠军为公益发声</p>
+					<span>2016-08-13</span>
+				</li>
+				<li>
+					<p>五位奥运冠军空降温州，与奥康共启“梦想跑道”公益计划</p>
+					<span>2016-08-13</span>
+				</li>
+				<li>
+					<p>奥康搭建时尚平台深耕运动领域</p>
+					<span>2016-08-03</span>
+				</li>
+				<li>
+					<p>奥康在黔点燃发展史上第三把“火”</p>
+					<span>2016-07-09</span>
+				</li>
+				<li>
+					<p>王振滔率管理团队西下贵州“思考”</p>
+					<span>2016-07-19</span>
+				</li>
+				<li>
+					<p>奥康2016思考周致良知心学</p>
+					<span>2016-07-09</span>
+				</li>
+			</ul>
+		</div>
+		<img src="img/htimg-1.png"/>
+		<div id="guide">
+			<div class="g1">
+				<h6>奥康承诺</h6>
+				<ul>
+					<li class="l1">
+						<span class="a">正品行货</span>
+						<span class="b">行货正品、奥康旗下唯一官方商城。</span>
+					</li>
+					<li class="l2">
+						<span class="a">闪电发货</span>
+						<span class="b">全国包邮(港澳台除外),最快一天送达。</span>
+					</li>
+					<li class="l3">
+						<span class="a">尊贵服务</span>
+						<span class="b">会员专属折扣与服务，同享线下优惠。</span>
+					</li>
+					<li class="l4">
+						<span class="a">七日退换</span>
+						<span class="b">七日内可自由退换货，并享受国家三包服务。</span>
+					</li>
+				</ul>
+			</div>
+			<div class="g2">
+				<h6>奥康服务</h6>
+				<ul class="u1">
+					<li class="a">新手指南</li>
+					<li>如何注册/登入</li>
+					<li>找回密码</li>
+					<li>会员等级</li>
+					<li>购物保障</li>
+					<li class="b">售后服务</li>
+					<li>退换货流程</li>
+					<li>如何投诉</li>
+					<li>退款说明</li>
+					<li>练习客服</li>
+				</ul>
+				<ul class="u2">
+					<li class="a">购物指南</li>
+					<li>如何购物</li>
+					<li>团购说明</li>
+					<li>企事业单位采购</li>
+					<li>购物常见问题</li>
+					<li class="b">关于奥康商城</li>
+					<li>商城简介</li>
+					<li>奥康资讯</li>
+					<li>人才招聘</li>
+					<li>线下同款</li>
+				</ul>
+				<ul class="u3">
+					<li class="a">支付与配送</li>
+					<li>支付常见问题</li>
+					<li>在线支付</li>
+					<li>配送收费</li>
+					<li>上门服务</li>
+					<li class="b">客服热线</li>
+					<li>4009-603001</li>
+					<li>工作时间</li>
+					<li>9:00-22:00</li>
+					<li>帮助中心</li>
+				</ul>
+			</div>
+			<div class="g3">
+				<h6>关注奥康商城</h6>
+				<ul class="u1">
+					<li class="l1">
+						<span class="a">手机客户端</span>
+						<span class="b">轻松购物，迅速到家！</span>
+						<span class="f1"><img src="img/AppStore-1.png"/></span>
+						<span class="f2"><img src="img/Android-1.png"/></span>
+						<span>
+							<span class="c1">手机登入</span>
+							<a class="d" href="javascript:;">m.aokang.cn</a>
+							<span class="c2">指尖购物</span>
+						</span>
+					</li>
+					<li class="l2">
+						<span class="a">奥康商城官方微信</span>
+						<span class="b">微信扫二维码，随时随地地与我们亲密接触精彩活动，劲爆优惠触手可得！</span>
+					</li>
+				</ul>
+				<ul class="u2">
+					<li class="l3">
+						<span class="c">查看腾讯微博</span>
+						<a class="e" href="javascript:;">立即关注</a>
+					</li>
+					<li class="l4">
+						<span class="c">查看新浪微博</span>
+						<a class="e" href="javascript:;">立即关注</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+		<div id="copyRight">
+			<ul class="u1">
+				<li>友情链接</li>
+				<li>顺丰快递查询</li>
+				<li>家具网上商城</li>
+				<li>淘粉吧</li>
+				<li>品牌资讯</li>
+				<li>客户经理</li>
+				<li>装修效果图</li>
+				<li>1688批发网</li>
+				<li>何金昌旗舰店</li>
+				<li>楚天运动频道</li>
+				<li>更多</li>
+			</ul>
+			<ul class="u2">
+				<li>About AOKANG</li>
+				<li>品牌介绍</li>
+				<li>招贤纳士</li>
+				<li>手机奥康</li>
+				<li>练习我们</li>
+				<li>网站地图</li>
+				<li>奥康资讯</li>
+				<li class="l8">友情链接</li>
+			</ul>
+			<span>Copyright © 2014 奥康国际电子商务有限公司(aokang.cn) All Rights Reserved    浙ICP备05037901号-5 技术支持:</span>
+			<a href="javascript:;">奥康电商信息技术部</a>
+		</div>
+		<div id="panel">
+			<ul>
+				<li><a href="javascript:;">官方推荐</a></li>
+				<li><a href="javascript:;">天天团</a></li>
+				<li><a href="javascript:;">奥康</a></li>
+				<li><a href="javascript:;">奥康女鞋</a></li>
+				<li><a href="javascript:;">康龙</a></li>
+				<li><a href="javascript:;">美丽佳人</a></li>
+				<li><a href="javascript:;">红火鸟</a></li>
+				<li><a href="javascript:;">劲浪</a></li>
+				<li><a href="javascript:;">公子哥</a></li>
+				<li><a href="javascript:;">RIIID</a></li>
+				<li><a href="javascript:;">GOLL谷尔</a></li>
+				<li><a href="javascript:;">幸福猫</a></li>
+			</ul>
+		</div>
+		<div id="widget">
+			<a class="a1" href="javascript:;">收起</a>
+			<a class="a2" href="javascript:;">/展开</a>
+			<a class="a3" href="javascript:;">在线客服</a>
+			<a class="a4" href="javascript:;">有奖调查</a>
+			<a class="a5" href="javascript:;">二维码</a>
+			<a class="a6" href="javascript:;"></a>
+		</div>
+		<img id="fimg" src="img/fewm-1.png"/>
+	</body>
+</html>

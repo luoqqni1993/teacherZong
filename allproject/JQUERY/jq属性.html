@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script type="text/javascript" src="js/jquery-1.11.0.js"></script>
+		<script type="text/javascript">
+			$(document).ready(function(){
+				//console.log($("img").attr("src"))
+				//$("input").removeAttr("value");
+			//console.log(	$('ul li:last').addClass(function() {
+ //			 return 'item-' + $(this).index();
+//					}))
+			//$("form>input");
+			//console.log($("div:contains('John')"))    //匹配多个div中含有John这段字符的div
+			//console.log($("div:has(p)").addClass("demo"))  //给div下的p标签添加class名为 demo
+			//$("span:empty")  // 匹配内容为空的span标签
+			//console.log($("li:parent"))    //匹配含有子元素或者文本的 li 标签
+			console.log($("div[id]" ,"span[id]"))   //匹配所有有id属性的div
+			})
+		</script>
+	</head>
+	<body>
+		<p></p><span></span><span id="">
+			
+		</span>
+<input name="none" />
+		<input name="text" value="按钮"/>
+		<ul>
+      <li>Hello</li>
+      <li>Hello</li>
+      <li>Hello</li>
+		</ul>
+<div>John Resig</div>
+<div id="q"><p>George Martin</p></div>
+<div id="w">Malcom John Sinclair</div>
+<div id="e">J. Ohn</div>
+<form>
+  <label>Name:</label>
+  <input name="name" />
+  <fieldset>
+      <label>Newsletter:</label>
+      <input name="newsletter" />
+ </fieldset>
+</form>
+	</body>
+</html>

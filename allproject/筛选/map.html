@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="js/jquery.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			function demo(){
+				console.log($("p").append($("input").map(function(){
+					return $(this).val();
+				}).get().join(", ")));
+				alert($("p").append($("input").map(function(){
+					return $(this).val();
+				}).get().join(", ")) instanceof Object)
+			}
+			$(document).ready(function(){
+				demo();
+			})
+		</script>
+	</head>
+	<body>
+		<p><b>Values: </b></p>
+		<form>
+		  <input type="text" name="name" value="John"/>
+		  <input type="text" name="password" value="password"/>
+		  <input type="text" name="url" value="http://ejohn.org/"/>
+		</form>
+	</body>
+</html>

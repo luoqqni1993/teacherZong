@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="js/jquery.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+		//给图片定位，最后一张图不能超过浏览器宽度，设定id为container的div的宽度，当前宽度是图片最大整数倍
+			//得到最大宽度,返回值c为横向距离存在div的个数
+			function initCss(){
+				var _c=Math.floor(($("body").width()-6)/154);
+				var _w=_c*154;//当前浏览器窗口的宽度;
+				$("#container").css("width",_w+"px");
+				return _c;
+			}
+			//遍历横向的所有div，使第一列的高度都为0
+			function initArray(c){
+				_arr=new Array(c);
+				for(var i=_s;i<c;i++){
+					_arr[i]=0;
+				}
+			}
+			var _arr=[];//建立一个空数组,数组里面存放的是div的高度
+			var _s=0;
+			//插入图片
+			function dealDate(data){
+				var _div=null,_span=null,_img=null;
+				var _container=document.getElementById("container");
+				for(var k=_s;k<_s+40&&k<data["images"].length;k++){//循环遍历，一次加载40张图片
+					_img=document.createElement("img");//建立图片节点
+					_img.src="waterfall/"+(k+1)+".jpg";//给图片节点地址
+					_span=document.createElement("span");//建立span标签
+					_span.innerHTML="范冰冰";//给span标签中插入文字
+					_div=document.createElement("div");//建立div标签
+					_div.className="module";//使div标签的class名为module
+					_div.appendChild(_img);//将img标签嵌入div标签中
+					_div.appendChild(_span);//将span标签嵌入div标签中
+					_container.appendChild(_div);//将div标签嵌入容器中
+				}
+			}
+			//最小高度
+			function minHeight(){
+				var n=0,_min=_arr[0];//开始时设置第一张图片高度最小
+				for(var i=_s+1;i<_arr.length;i++){//第一张图片与后面的图片进行比较，如果第一张图片比后面的图片高，彼此进行交换。
+					if(_min>_arr[i]){
+						_min=_arr[i];
+						n=i;
+					}
+				}
+				return n;//返回最小高度图片的下标.
+			}
+			//开始瀑布流
+			function waterfall(_s){
+				var n=0;
+				var _list=$(".module").get();//获取所有的class名为module的div标签，这些标签组成了一个数组;
+				for(var i=_s;i<_list.length;i++){
+					n=minHeight();//调用获得最小高度的函数,n为其下标
+					$(_list[i]).css({"left":n*154+"px","top":_arr[n]+"px"});
+					_arr[n]+=_list[i].offsetHeight;
+				}
+			}
+			//检查图片加载
+			function checkImgComplete(){
+				var _list=$("#container img").get();//容器里面的所有的img元素组成一个数组
+				var _timer=0;//声明一个新的计时器的返回值
+				function checking(){//检查图片加载的函数
+					window.clearTimeout(_timer);//清空计时器
+					var _complete=true;//开关
+					console.log(_list);
+					for(var i=_s;i<_list.length;i++){//遍历所有的img标签
+						if(!_list[i].complete){//如果图片没有加载完成
+							_complete=false;//开关等于false
+						}
+					}
+					//_list[0].conplete;//complete:img标签自带属性：图片加载完成属性值为:true；未加载完成属性值为false
+					if(_complete){//如果开关等于true
+						waterfall(_s);//执行瀑布流函数
+					}else{//如果开关等于false
+						_timer=window.setTimeout(checking,60);//执行计时器
+					}
+				}
+				checking();//执行检查图片加载函数
+			}
+			//从json中加载图片
+			function loadImage(){
+				$.post("js/waterfall.json",null,function(data,textStatus){
+					dealDate(data);//执行插入图片程序
+					checkImgComplete();//执行检查图片是否加载完成函数
+				},"json")
+			}
+			function rescetContainerHeight(){
+				var _max=_arr[0];
+				for(var i=_s+1;i<_arr[0].length;i++){
+					if(_max<_arr[i]){
+						_max=_arr[i]
+					}
+				}
+				$("container").css("height",_max+"px");
+			}
+			$(document).ready(function(){
+				var _c=initCss();//获得一排div的个数
+				initArray(_c);//建立一个一排的数组;
+				loadImage();
+				
+			})
+			window.onscroll=function(){
+				var total=$(document).height();
+				var _w=$(document).scrollTop();
+				var _s=$(window).height();
+				if(total==_w+_s){
+					_s=_s+40;
+					loadImage();
+					
+				}
+			}
+			window.onresize=function(){
+				var _c=initCss();
+				initArray(_c);;
+				waterfall(0);
+			}
+		</script>
+		
+		<style type="text/css">
+		body{ margin:0 auto;}
+        div#container{ width:auto; height:auto; border:solid 3px #f1f1f1; position:relative; margin:0 auto;}
+        div.module{ width:150px; height:auto; padding:2px; overflow:hidden; position:absolute;}
+        div img{ width:150px; border:none; float:left;}
+        div span{ width:100%; height:30px; line-height:30px; text-align:center; display:block; float:left;}
+		</style>
+	</head>
+	<body>
+		<div id="container">
+			
+		</div>
+	</body>
+</html>

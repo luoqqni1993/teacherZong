@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script type="text/javascript">
+			var dog={age:8,run:function(){
+				"跑步";
+			}}
+			var box=function(){
+				var age=8;   //私有变量
+				function run(){ //私有函数
+					return "跑步";
+				}
+				return {//返回一个对象，这个对象是对外的公共接口
+					getAge:age,
+					run:run
+				}
+			}();//匿名函数自我执行
+			alert(box.getAge);
+			alert(box.run());
+			
+			var box=function(){
+				var age=8;
+				function run(){
+					return "跑步";
+				}
+				var obj= {
+					getAge:age,
+					run:run
+				}
+			}();
+		</script>
+	</head>
+	<body>
+	</body>
+</html>

@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+		<script type="text/javascript">
+			//document.cookie="cart={\"1001\":2,\"1002\":1}";
+			function plus(identify){
+				//要考虑cookie为空
+				var _temp=document.cookie;
+				if(/cart=/.test(_temp)){
+					var _cart=JSON.parse(_temp.split("=")[1]);
+					var _cookie="cart={";
+					if(!_cart[identify]){
+						for(var k in _cart){
+							_cookie+="\""+k+"\":"+_cart[k]+",";
+						}
+						_cookie+="\""+identify+"\":1,";
+					}else{
+						for(var k in _cart){
+							if(k==identify){
+								_cookie+="\""+k+"\":"+(_cart[k]+1)+",";
+							}else{
+								_cookie+="\""+k+"\":"+_cart[k]+",";
+							}
+						}
+					}
+					_cookie=_cookie.substring(0,_cookie.lastIndexOf(","));
+					_cookie+="}";
+					document.cookie=_cookie;
+				}else{
+					document.cookie="cart={\""+identify+"\":1}";
+				}
+			}
+			
+			function deal(identify){
+				var _temp=document.cookie;
+				if(/cart=/.test(_temp)){
+					var _cart=JSON.parse(_temp.split("=")[1]);
+					var _cookie="cart={";
+					if(_cart[identify]){
+						for(var k in _cart){
+							if(k!==identify){
+								_cookie+="\""+k+"\":"+_cart[k]+",";
+							}
+						}
+						document.cookie=_cookie;
+					}
+				}
+			}
+			var _products={
+				"1001":{
+					"name":"电器",
+					"price":100,
+					"img":"",
+					"images":[],
+					"details":[],
+					"comment":"",
+					"parameter":{
+						
+					}
+				},
+				"1002":{
+					"name":"mobile",
+					"price":500,
+					"img":"",
+					"images":[],
+					"details":[],
+					"comment":"",
+					"parameter":{
+						
+					}
+				},
+				"1003":{
+					"name":"cloth",
+					"price":80,
+					"img":"",
+					"images":[],
+					"details":[],
+					"comment":"",
+					"parameter":{
+						
+					}
+				}
+			}
+			
+			function boundEvent(){
+				var _list=document.getElementsByTagName("div");
+				for(var i=0;i<_list.length;i++){
+					_list[i].onclick=function(){
+						plus(this.id);
+						
+					}
+				}
+			}
+			function readData(){
+				var _html="";
+				for(var k in _products){
+					_html+="<div id=\""+k+"\">"+_products[k]["name"]+"</div>";
+					
+				}
+				document.getElementsByTagName("body")[0].innerHTML=_html;
+				
+			}
+			window.onload=function(){
+				readData();
+				boundEvent();
+				
+				
+				if(document.cookie.length>0){
+					var _cookie=JSON.parse(document.cookie.split("=")[1]);
+					var _html="";
+					for(var k in _cookie){
+						for(var p in _products){
+							if(k===p){
+								_html+="<div>"+_products[p]["name"]+","+_products[p]["price"]+","+_cookie[k]+"</div>";
+							}
+						}
+					}
+					document.getElementsByTagName("body")[0].innerHTML+=_html;
+				}
+			}
+			
+			
+			
+			
+			
+			
+			
+			
+			
+		</script>
+	</head>
+	<body>
+		
+	</body>
+</html>

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script type="text/javascript">
+			function Person(name,age){
+			this.name=name;
+			this.age=age;
+			}
+			Person.prototype.showName=function(){
+			return this.name;
+			};
+			Person.prototype.showAge=function(){
+			return this.age;
+			};
+			//Man的构造函数
+			function Man(name,age,height){
+				Person.call(this,name,age);
+				this.height=height;
+			}
+			//oldMan的构造函数
+			function OldMan(name,age,height){
+				Person.call(this,name,age);
+				Man.call(this,name,age,height);//只能继承构造里的信息
+			}
+			//man继承Person的构造函数
+			for(var i in Person.prototype){
+				Man.prototype[i]=Person.prototype[i];
+			}
+			//oldMan继承Man的构造函数
+			for(var i in Man.prototype){
+				OldMan.prototype[i]=Man.prototype[i];
+			}
+			//oldMan继承Person的构造函数
+			for(var i in Person.prototype){
+				OldMan.prototype[i]=Person.prototype[i];
+			}
+//			var man=new Man("xm",18);
+//			alert(man.name);
+//			alert(man.age);
+//			alert(man.showName());
+//			alert(man.showAge());
+			var OldMan=new OldMan("lm",88,180);
+			alert(OldMan.name);
+			alert(OldMan.age);
+			alert(OldMan.height);
+		</script>
+	</head>
+	<body>
+	</body>
+</html>

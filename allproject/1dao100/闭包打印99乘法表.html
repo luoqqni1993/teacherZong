@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script type="text/javascript">
+			function closure(){
+				var i=1;
+				return function(h){
+					i=h;
+					for(var n=1;n<=i;n++){
+						document.write(n+'*'+i+'='+n*i+"&nbsp;&nbsp;");
+					}
+					document.write('<br>');
+				}
+			}
+			var fn=closure();
+			for(var m=1;m<10;m++){
+				fn(m);
+			}
+		</script>
+	</head>
+	<body>
+	</body>
+</html>

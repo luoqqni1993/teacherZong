@@ -1,0 +1,150 @@
+ <!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+		<script>
+			//普通函数
+		/*function box(){
+			return "xm";
+		}
+		alert(box());
+		//匿名函数
+		function (){
+			return "xm";
+		}*/
+		//将匿名函数赋值给一个变量
+		/*var box=function(){
+			return "xm";
+		}
+		alert(box());*/
+		//通过自我执行来执行匿名函数
+		/*(function(){
+			alert("xm");
+		})();*/
+		//把匿名函数自我执行的返回值赋值给一个变量
+		//将自我执行的匿名函数放到其他表达式中，可以省略可以省略包裹匿名函数的小括号
+		/*var box=(function (){
+			return "xm";
+		})();
+		alert(box);
+		
+		var fn=function(){
+			return "xh";
+		}();
+		alert(fn);*/
+		//匿名函数自我执行后用alert打印出返回值
+		/*alert(function(){
+			return "xm";
+		}());
+		alert((function(){
+			return "xm";
+		})());*/
+		
+		//自我执行匿名函数的传参
+		/*var box=(function (num){
+			return num;
+		})(18);
+		alert(box);
+		
+		alert(function (num){
+			return num;
+		}(19));*/
+		
+		/*function box(){
+			return function(){
+				return "xm";
+			}
+		}
+		alert(box());
+		alert(box()());*/
+		//通过闭包返回局部变量
+		/*function box(){
+			var num=18;
+			alert("box函数里的:"+this);
+			return function(){  //闭包函数的作用域也属于全局作用域(window),会将它所在函数内部的局部变量强行滞留在内存中，直到程序关闭退出。
+				alert("闭包函数里的"+this);
+				return num;
+			}
+			num=null;
+		}
+		alert(box()());*/
+		
+		/*function box1(){
+			var num=19;
+			return function(num){
+				return num;
+			}(num)
+		}
+		alert(box1());*/
+		//使用全局变量进行累加
+		/*var num=10;
+		function box(){
+			num++;
+		}
+		alert(num);
+		box();
+		alert(num);
+		box();
+		alert(num);*/
+		//使用局部变量进行累加
+//		function box(){
+//			var num=10;
+//			return function(){
+//				return ++num;
+//			}
+//		}
+////		alert(box()());
+////		alert(box()());
+////		alert(box()());
+////      var b=function(){//b接收到的是一个常量值,不是一个函数
+//		//return ++num;	
+////}
+//		var b=box();
+//		alert(b);//所以不能通过b()的方式调用
+//		alert(b());
+//		alert(b());
+//		alert(b());
+//		b=null;
+//		//循环里的匿名函数的取值问题
+		function fn(){
+			var arr=[];
+			for(var i=0;i<5;i++){
+				arr[i]=function(){
+					return i;
+				}();
+			}
+			return arr;
+		}
+		alert(fn());
+		alert(fn()[0]);
+		var list=fn();
+			for(var i=0;i<list.length;i++){
+				alert(list[i]);
+			}
+
+
+			//循环函数里匿名函数的取值问题
+//			function fn(){
+//			var arr=[];
+//			for(var i=0;i<5;i++){
+//				arr[i]=function(num){
+//					return function(){
+//					return num;
+//					};
+//				}(i);
+//			}
+//			return arr;
+//		}
+//		//alert(fn());
+//		//alert(fn()[0]());
+//		var list=fn();
+//			for(var i=0;i<list.length;i++){
+//				alert(list[i]());
+//			}
+		</script>
+	</head>
+	<body>
+		
+	</body>
+</html>

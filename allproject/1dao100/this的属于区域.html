@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			div{height:100px;width:100px;background:red;}
+		</style>
+		<script type="text/javascript">
+			var _obj=new Object();
+			_obj.fn=function(){
+				console.log(this);
+				return function(){
+					console.log(this);
+				}
+			}
+			window.onload=function(){
+			var _div=document.getElementsByTagName("div")[0];
+				_div.onclick=function(){
+					console.log(this);
+					(function(){
+						console.log(this);
+					})();
+					var _fn=_obj.fn();
+					_fn();
+				}
+			}
+		</script>
+	</head>
+	<body>
+		<div></div>
+	</body>
+</html>

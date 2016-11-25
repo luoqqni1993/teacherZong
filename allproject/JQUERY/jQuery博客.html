@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<style type="text/css">
+		 body{ margin:0 auto;}
+        img{boder:none; 
+        float:left; 
+        width:510px;
+        }
+        #slider{ width:660px; height:334px;
+         margin:0 auto; 
+         overflow:hidden; 
+         margin-top:100px;
+         }
+        #slider span{ display:block; 
+        width:30px; 
+        height:334px; 
+        overflow:hidden; 
+        float:left;}
+	</style>
+	<script type="text/javascript" src="js/jquery-2.1.0.js"></script>
+	<script type="text/javascript">
+		$(document).ready(function(){
+			$("div span").mouseenter(function(){
+				$("div span").not(this).animate({width:"30px"},1000);
+				$(this).animate({width:"510px"},1000);
+			})
+			 function createImg(){
+			 	for(var i=0;i<6;i++){
+			 		$("div").append("<span><img alt=\"\" src=\"img/0"+(i+1)+".jpg\"></span>")
+			 	}
+			 }
+		})
+	</script>
+	<body>
+		<div id="slider">
+			<span ><img src="img/1.jpg</span>
+		</div>
+	</body>
+</html>

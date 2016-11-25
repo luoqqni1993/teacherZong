@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			body{margin:0 auto;text-align:center;}
+			#contanier{border:solid 1px #000;width:665px;height:460px;overflow:hidden;position:relative;
+			margin:50px auto;}
+			#contanier div{width:30px;height:100%;background:red;position:absolute;background:url(img/0d794095766a29334cb6917d4710c427.gif);}
+		</style>
+		<script type="text/javascript">
+		function createDiv(n){
+			var _div=null;
+			for(var i=0;i<n;i++){
+				_div=document.createElement("div");
+				_contanier=document.getElementById("contanier");
+				_contanier.appendChild(_div);
+				_div.style.left=i*30+'px';
+				_div.style.backgroundPosition=(-i*30)+'px '+"0px";
+			}
+		}
+			function blinds(){
+				createDiv(23);
+				var _timer=0;
+				var _width=30;
+				var _list=document.getElementById("contanier").getElementsByTagName("div");
+				function exec(){
+					window.clearTimeout(_timer);
+					_width-=2;
+					for(var i=0;i<_list.length;i++){
+						_list[i].style.width=_width+'px';
+					}if(_width>0){
+						_timer=window.setTimeout(exec,100);
+					}
+					
+				}
+				exec();
+			}
+			window.onload=function(){
+				blinds();
+			}
+		</script>
+	</head>
+	<body>
+		<div id="contanier">
+			
+		</div>
+	</body>
+</html>

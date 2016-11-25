@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="js/jquery.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			function demo(){
+				$("ul li:last").addClass(function(){
+					return 'item-'+$(this).index();
+				})
+			}
+			$(document).ready(function(){
+				demo();
+			})
+		</script>
+	</head>
+	<body>
+		<ul>
+			<li>Hello</li>
+			<li>Hello</li>
+			<li>Hello</li>
+		</ul>
+	</body>
+</html>

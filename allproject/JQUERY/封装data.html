@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+		div{height:100px;width:100px;background:brown;}
+		</style>
+		<script src="js/jquery-1.11.0.js"></script>
+		<script type="text/javascript">
+			$(document).ready(function(){
+				$("div")[0].on=function(_type,data,callback){
+					this[_type]=function(e){
+						e.data=data;
+						callback(e);
+					}
+				}
+				$("div")[0].on("onclick",{foo:"ni"},demo);
+				function demo(e){
+					alert(e.data.foo);		
+				}
+				
+			})
+			
+		</script>
+		
+	</head>
+	<body>
+		<div></div>
+	</body>
+</html>

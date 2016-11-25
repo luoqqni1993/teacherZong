@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			div{height:100px;width:100px;background:red;}
+		</style>
+		<script src="js/jquery.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			function css(_param){
+				_param.width(0,100);
+				_param.width(0,document.getElementsByTagName("div")[0].clientWidth);
+			}
+			var _obj={
+				width:function(index,value){
+					console.log(value);
+					return parseFloat(value)*1.2;
+				},
+				height:function(index,value){
+					return parseFloat(value)*1.2;
+				}
+			}
+			_obj.width(0,100);
+			css(_obj);
+			$(document).ready(function(){
+//				$("div").click(function(){
+//					$(this).css({
+//						width:function(index,value){
+//							console.log(value);
+//							return parseFloat(value)*1.2;
+//						},
+//						height:function(index,value){
+//						return parseFloat(value)*1.2;
+//					}
+//				})
+//				})
+			css(_obj);
+			})
+		</script>
+	</head>
+	<body>
+		<div></div>
+	</body>
+</html>

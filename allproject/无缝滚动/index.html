@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+		<script type="text/javascript">
+		window.onload=function(){
+			var oDiv=document.getElementById("box");
+			var oUl=document.getElementsByTagName("ul")[0];
+			var k=0;
+			setInterval(function(){
+				k-=400;
+				if(k==(-2400)){
+					k=0;
+					
+				}
+				oUl.style.left=k+"px";
+			},1000)
+		}
+			
+		</script>
+		<style type="text/css">
+			*{padding:0;margin:0;}
+			div{width:800px;height:405px;overflow:hidden;position:relative;}
+			ul{width:4800px;height:405px;position:absolute;left:800px;top:0px;}
+			li{float:left;}
+			img{width:400px;}
+		</style>
+	</head>
+	<body>
+		<div id="box">
+			<ul>
+				<li><img src="img/img1.jpg"></li>
+				<li><img src="img/img2.jpg"></li>
+				<li><img src="img/img3.jpg"></li>
+				<li><img src="img/img4.jpg"></li>
+				<li><img src="img/img5.jpg"></li>
+				<li><img src="img/img6.jpg"></li>
+			</ul>
+		</div>
+	</body>
+</html>

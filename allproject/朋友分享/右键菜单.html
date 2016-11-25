@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style type="text/css">
+	*{
+		margin: 0;
+		padding: 0;
+		list-style: none;
+	}
+		#box{
+			width: 200px;
+			line-height: 40px;
+			border: solid 2px #03ccbb;
+			position: absolute;
+			left: 0;
+			top: 0;
+			display: none;
+		}
+		#box.active{
+			display: block;
+		}
+		#box li{
+			border-top: solid 2px #03ccbb;
+			margin-top: -2px;
+			text-align: center;
+			color: #FFF;
+			font-weight: bold;
+			cursor: pointer;
+		}
+	</style>
+	
+		
+	<script>
+	window.onload=function(){
+		var oBox = document.getElementById('box');
+		var aLi = oBox.getElementsByTagName('li');		
+		for(var i=0; i<aLi.length; i++){
+			aLi[i].style.background = aLi[i].getAttribute('dataColor');
+			aLi[i].onclick=function(){
+				document.body.style.background=this.getAttribute('dataColor');
+				oBox.className="";
+			}
+		}
+		document.oncontextmenu=function(e){
+			var maxX=(document.documentElement.clientWidth || document.body.clientHeight)-oBox.offsetWidth;
+			var maxY=(document.documentElement.clientHeight || document.body.clientWidth)-oBox.offsetHeight;
+			e=e || window.event;
+			var nX=e.clientX;
+			var nY=e.clientY;
+			if(nX>maxX){
+				nX=maxX;
+			}
+			if(nY>maxY){
+				nY=maxY;
+			}
+			oBox.style.left=nX+'px';
+			oBox.style.top=nY+'px';
+			oBox.className="active";
+			document.onclick=function(){
+				oBox.className="";
+				document.onclick=null;
+			}
+			return false;
+		}
+
+	}			
+    </script>
+</head>
+<body>
+	<ul id="box">
+		<li dataColor="#F00">红色</li>
+		<li dataColor="#F90">橙色</li>
+		<li dataColor="yellow">黄色</li>
+		<li dataColor="green">绿色</li>
+		<li dataColor="blue">蓝色</li>
+		<li dataColor="purple">紫色</li>
+	</ul>
+</body>
+</html>

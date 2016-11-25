@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script type="text/javascript">
+			(function(){
+				var age=0;//私有变量
+				Box=function(value){
+					age=value;//可以共享的私有变量
+				}
+				Box.prototype.getAge=function(){//可以共享的原型方法
+					return age;
+				}
+			})();
+			var box=new Box(18);
+			alert(box.getAge());
+		</script>
+	</head>
+	<body>
+	</body>
+</html>

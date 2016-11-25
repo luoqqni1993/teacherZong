@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			#box{overflow:hidden;margin:50px auto;height:35px;width:700px;}
+			span{height:30px;width:30px;border:1px solid black;text-align:center;line-height:30px;margin-left:5px;float:left;}
+			i{height:10px;width:10px;display:block;margin-top:3px;border:1px solid black;border-radius:100%;}
+		</style>
+		<script type="text/javascript">
+			window.onload=function(){
+				var _a=document.getElementsByTagName('a');
+				var _i=document.getElementsByTagName('i');
+				_a[1].onclick=function(){
+					_i[0].style.background="red";
+					_i[1].style.background="white"
+					_i[2].style.background="white";
+					_i[3].style.background="white";
+					_i[4].style.background="white";
+					_i[5].style.background="white";
+					_i[6].style.background="white";
+					_i[7].style.background="white";
+					_i[8].style.background="white";
+				}
+				_a[2].onclick=function(){
+					_i[0].style.background="white";
+					_i[1].style.background="red";
+					_i[2].style.background="white";
+					_i[3].style.background="white";
+					_i[4].style.background="white";
+					_i[5].style.background="white";
+					_i[6].style.background="white";
+					_i[7].style.background="white";
+					_i[8].style.background="white";
+				}
+				_a[3].onclick=function(){
+					_i[0].style.background="white";
+					_i[1].style.background="white";
+					_i[2].style.background="red";
+					_i[3].style.background="white";
+					_i[4].style.background="white";
+					_i[5].style.background="white";
+					_i[6].style.background="white";
+					_i[7].style.background="white";
+					_i[8].style.background="white";
+				}
+				_a[4].onclick=function(){
+					_i[0].style.background="white";
+					_i[1].style.background="white";
+					_i[2].style.background="white";
+					_i[3].style.background="red";
+					_i[4].style.background="white";
+					_i[5].style.background="white";
+					_i[6].style.background="white";
+					_i[7].style.background="white";
+					_i[8].style.background="white";
+				}
+				_a[5].onclick=function(){
+					_i[0].style.background="white";
+					_i[1].style.background="white";
+					_i[2].style.background="white";
+					_i[3].style.background="white";
+					_i[4].style.background="red";
+					_i[5].style.background="white";
+					_i[6].style.background="white";
+					_i[7].style.background="white";
+					_i[8].style.background="white";
+				}
+				_a[6].onclick=function(){
+					_i[0].style.background="white";
+					_i[1].style.background="white";
+					_i[2].style.background="white";
+					_i[3].style.background="white";
+					_i[4].style.background="white";
+					_i[5].style.background="red";
+					_i[6].style.background="white";
+					_i[7].style.background="white";
+					_i[8].style.background="white";
+				}
+				_a[7].onclick=function(){
+					_i[0].style.background="white";
+					_i[1].style.background="white";
+					_i[2].style.background="white";
+					_i[3].style.background="white";
+					_i[4].style.background="white";
+					_i[5].style.background="white";
+					_i[6].style.background="red";
+					_i[7].style.background="white";
+					_i[8].style.background="white";
+				}
+				_a[8].onclick=function(){
+					_i[0].style.background="white";
+					_i[1].style.background="white";
+					_i[2].style.background="white";
+					_i[3].style.background="white";
+					_i[4].style.background="white";
+					_i[5].style.background="white";
+					_i[6].style.background="white";
+					_i[7].style.background="red";
+					_i[8].style.background="white";
+				}
+				_a[9].onclick=function(){
+					_i[0].style.background="white";
+					_i[1].style.background="white";
+					_i[2].style.background="white";
+					_i[3].style.background="white";
+					_i[4].style.background="white";
+					_i[5].style.background="white";
+					_i[6].style.background="white";
+					_i[7].style.background="white";
+					_i[8].style.background="red";
+				}
+				_a[10].onclick=function(){
+					for(var i ib _i){
+						var t=_i[i];
+						_i[i]=_i[i+1];
+						_i[i+1]=_i[i];
+					}
+				}
+			}
+		</script>
+	</head>
+	<body>
+		<div id="box">
+			<a href="javascript:;"><span style="width:80px;">上一页</span></a>
+			<a href="javascript:;"><span>1</span></a>
+			<a href="javascript:;"><span>2</span></a>
+			<a href="javascript:;"><span>3</span></a>
+			<a href="javascript:;"><span>4</span></a>
+			<a href="javascript:;"><span>5</span></a>
+			<a href="javascript:;"><span>6</span></a>
+			<a href="javascript:;"><span>7</span></a>
+			<a href="javascript:;"><span>8</span></a>
+			<a href="javascript:;"><span>9</span></a>
+			<a href="javascript:;"><span style="width:80px;">下一页</span></a>
+		</div>
+		<i></i>
+		<i></i>
+		<i></i>
+		<i></i>
+		<i></i>
+		<i></i>
+		<i></i>
+		<i></i>
+		<i></i>
+	</body>
+</html>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script type="text/javascript">
+			function Box(name,age){
+				var name=name;
+				var age=age;
+				//提供访问接口
+				this.getName=function(){
+					return name;
+				}
+				this.getAge=function(){
+					return age;
+				}
+				this.setName=function(value){
+					name=value;
+				}
+				this.setAge=function(value){
+					age=value;
+				}
+			}
+			var box=new Box("xm",18);
+				alert(box.getName());
+				alert(box.getAge());
+				box.setName("xh");
+				alert(box.getName());
+				var box1=new Box("xh",17);
+				alert(box.getName());
+		</script>
+	</head>
+	<body>
+	</body>
+</html>
